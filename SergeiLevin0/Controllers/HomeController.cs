@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SergeiLevin0.ViewModels;
 
 namespace SergeiLevin0.Controllers
 {
@@ -26,6 +27,21 @@ namespace SergeiLevin0.Controllers
         {
             //return Content("Hello, it's firts contorller");
             return Content(_Configuration["CustomData"]);
+        }
+
+        public static  readonly List<EmployeeView> EmployeesList=new List<EmployeeView>
+        {
+            new EmployeeView{Id=0, FirstName = "Ivan", SecondName = "Ivanov", Age = 38, Patronymic = "Ivanovich"},
+            new EmployeeView{Id=1, FirstName = "Petr", SecondName = "Petrov", Age = 25, Patronymic = "Petrovich"},
+            new EmployeeView{Id=2, FirstName = "Sidr", SecondName = "Sidorov", Age = 18, Patronymic = "Sidorovich"}
+        };
+
+        public IActionResult GetEmployees()
+        {
+            ViewBag.SomeData = "Hello World!";//динамический объект, позволяет устанавлеивать любые сво-ва 
+            ViewData["Test"] = "TestData";//спец.словарик куда можно вкладывать любые значения по любым ключам. Test - ключ
+            //оба предыдущих элемента для передачи в предстваление каких-то малозначащих данных
+            return View(EmployeesList);
         }
     }
 }
