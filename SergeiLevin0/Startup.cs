@@ -32,6 +32,9 @@ namespace SergeiLevin0
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.UseStaticFiles(new StaticFileOptions {ServeUnknownFileTypes = true});//будут подсоединяться любые файлы
+            app.UseStaticFiles();//будут подсоединяться файлы стандартного содрежимого, т.е. картинки, html-страницы, css и т.п. 
+            app.UseDefaultFiles();
 
             //app.UseMvcWithDefaultRoute(); автоматическая конфигурация того, что ниже
             app.UseMvc(routes =>

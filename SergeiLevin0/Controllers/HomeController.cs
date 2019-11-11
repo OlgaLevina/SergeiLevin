@@ -19,6 +19,11 @@ namespace SergeiLevin0.Controllers
 
         public IActionResult Index()
         {
+            return View();//вызовет предоставление из папки Home с название Index. Если хотим вызвать иное представление: return View("OtherView"); - которое тоже будет искаться в папке Хоум
+        }
+
+        public IActionResult ReadConfig()
+        {
             //return Content("Hello, it's firts contorller");
             return Content(_Configuration["CustomData"]);
         }
