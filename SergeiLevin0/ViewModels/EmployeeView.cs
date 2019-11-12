@@ -12,5 +12,8 @@ namespace SergeiLevin0.ViewModels
         public string SecondName { get; set; }
         public  string Patronymic { get; set; }
         public int Age { get; set; }
+        public string Position { get; set; }
+        public string Role { get; set; }
+
     }
 }
