@@ -19,19 +19,21 @@
         <th>Name</th>
         <th>SecondName</th>
         <th>Age</th>
-        <th>Детали</th>
+        <th>Должность</th>
+        <th>Права</th>
     </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>@Model.Id</td>
-            <td>@Model.FirstName</td>
-            <td>@Model.SecondName</td>
-            <td>@Model.Age</td>
-            <td><a asp-controller="Home" asp-action="GetEmployees">Return to list of empoyees!</a></td>
-        </tr>
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.FirstName</td>
+        <td>@Model.SecondName</td>
+        <td>@Model.Age</td>
+        <td>@Model.Position</td>
+        <td>@Model.Role</td>
+    </tr>
     </tbody>
-
 </table>
+<p><a asp-controller="Home" asp-action="GetEmployees">Return to list of empoyees!</a></p>
 </body>
 </html>
