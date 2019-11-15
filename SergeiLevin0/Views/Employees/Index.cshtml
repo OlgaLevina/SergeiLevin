@@ -1,17 +1,10 @@
 ﻿@using SergeiLevin0.ViewModels
 @model IEnumerable<SergeiLevin0.ViewModels.EmployeeView>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<!DOCTYPE html>
+@ViewBag.Title = "Сотрудники"
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>GetEmployees</title>
-</head>
-<body>
-    <h3>@ViewBag.Title</h3>
-    <h4>@ViewData["Description"]</h4>
-    <table>
+<h3>@ViewBag.Title</h3>     
+<table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,12 +22,9 @@
                     <td>@employee.FirstName</td>
                     <td>@employee.SecondName</td>
                     <td>@employee.Age</td>
-                    <td><a asp-controller="Home" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
+                    <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
                 </tr>
             }
         </tbody>
 
     </table>
-
-</body>
-</html>

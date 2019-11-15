@@ -1,6 +1,15 @@
-﻿@{ 
-    Layout = "_LayoutBase";
+﻿@{
+    Layout = "_LayoutBase"; //представление Layout обертывает представление LayoutBase
 }
 <div class="container">
     @RenderBody()
 </div>
+
+<!--пробрасываем связь с секциями из LayoutBase, иначе они не будут видны для тех представлений, которые будут влкючать в себя Layout, следим чтобы названия секций совпадали-->
+@section Styles{
+    @RenderSection("Styles", false)
+}
+
+@section Scripts{ 
+    @RenderSection("Scripts", false)
+}

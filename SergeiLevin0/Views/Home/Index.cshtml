@@ -1,11 +1,11 @@
-﻿@{ ViewData["Title"] = "Главная";
-    //ViewBag.Title="Главная страница"; - как вариант, сработает последний
+﻿@{ //ViewData["Title"] = "Главная";
     Layout = "_LayoutBase";
+    ViewBag.Title="Главная страница";// - как вариант, сработает последний
 }
 
 @*{await Html.Partial("Partial/_Slider");//при помощи штмл-хелпера через с#, синхронно}*@
 @*{await Html.PartialAsync("Partial/_Slider");//при помощи штмл-хелпера через с#, лучше асинхронно}*@
-<partial name="Partial/_Slider" /><!--тот же хелпер, но тегом-->
+<partial name="Partial/_Slider" /><!--тот же хелпер, но тегом, который работает асинхронно-->
 
 <section>
     <div class="container">
@@ -155,7 +155,7 @@
             </div>
 
             <div class="col-sm-9 padding-right">
-                <partial name="Partial/_FeaturesItems"/>
+                <partial name="Partial/_FeaturesItems" />
                 <partial name="Partial/_CategoryTab" />
                 @await Html.PartialAsync("Partial/_RecommendedItems")
 
@@ -164,3 +164,10 @@
     </div>
 </section>
 
+@section Styles{
+    <!--Styles-->
+}
+
+@section Scripts{
+    <!--Scripts-->
+}
