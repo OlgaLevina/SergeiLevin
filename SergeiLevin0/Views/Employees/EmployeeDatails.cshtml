@@ -1,25 +1,18 @@
-﻿@using SergeiLevin0.ViewModels
-@model SergeiLevin0.ViewModels.EmployeeView
+﻿@model SergeiLevin0.ViewModels.EmployeeView
+@{ViewBag.Title = "EmployeeDatails";
+    ViewData["Description"] = $"{Model.Id} {Model.SecondName} {Model.FirstName}";}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>EmployeeDatails @Model.Id @Model.SecondName</title>
-</head>
-<body>
     <h3>@ViewBag.Title</h3>
     <h4>@ViewData["Description"]</h4>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>SecondName</th>
-                <th>Age</th>
-                <th>Должность</th>
-                <th>Права</th>
+                <th>@Html.LabelFor(m => m.Id)</th>
+                <th>@Html.LabelFor(m => m.FirstName)</th>
+                <th>@Html.LabelFor(m => m.SecondName)</th>
+                <th>@Html.LabelFor(m => m.Age)</th>
+                <th>@Html.LabelFor(m => m.Position)</th>
+                <th>@Html.LabelFor(m => m.Role)</th>
             </tr>
         </thead>
         <tbody>
@@ -34,5 +27,3 @@
         </tbody>
     </table>
     <p><a asp-controller="Employees" asp-action="Index">Return to list of empoyees!</a></p>
-</body>
-</html>

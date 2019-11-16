@@ -1,6 +1,6 @@
 ﻿@using SergeiLevin0.ViewModels
 @model IEnumerable<SergeiLevin0.ViewModels.EmployeeView>
-@ViewBag.Title = "Сотрудники"
+@{ViewBag.Title = "Сотрудники";}
 
 <h3>@ViewBag.Title</h3>     
 <table class="table">
@@ -17,7 +17,9 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td>@employee.Id</td>
+                    <td>
+                        <a asp-controller="Employees" asp-action="DetailsName" asp-route-firstName="@employee.FirstName" asp-route-lastName="@employee.SecondName">@employee.Id</a>
+                    </td>
                     <td>@employee.FirstName</td>
                     <td>@employee.SecondName</td>
                     <td>@employee.Age</td>

@@ -28,12 +28,25 @@ namespace SergeiLevin0.Controllers
         }
         public IActionResult EmployeeDatails(int? id)
         {
-            if(id is null)  return BadRequest(); 
+            if (id is null) return BadRequest();
             EmployeeView employeee = EmployeesList.Find(i => i.Id == id);
             if (employeee is null) return NotFound();
             //ViewBag.Title = $"Employee Id{id}";
-            ViewData["Description"] = "Only one employee";
+            //ViewData["Description"] = "Only one employee";
             return View(employeee);
         }
+
+        public IActionResult DetailsName(string firstName, string lastName)
+        {
+            if (firstName is null || lastName is null) return BadRequest();
+            IEnumerable<EmployeeView> employees = EmployeesList;
+            if (!string.IsNullOrWhiteSpace(firstName)) employees = employees.Where(e => e.FirstName == firstName);
+            if (!string.IsNullOrWhiteSpace(lastName)) employees = employees.Where(e => e.SecondName == lastName);
+            var employee = employees.FirstOrDefault();
+            if (employee is null) return NotFound();
+            return View(nameof(EmployeeDatails), employee);
+
+        }
+
     }
 }
