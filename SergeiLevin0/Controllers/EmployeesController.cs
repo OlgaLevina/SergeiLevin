@@ -48,5 +48,10 @@ namespace SergeiLevin0.Controllers
 
         }
 
+        [HttpPost] //вызывается только под действием формата post к контроллеру, в этом случае можно передать много параметров - например все тело страницы
+        public IActionResult Edit(int id, [FromBody] EmployeeView employee)//данные модели - из тела запроса, а не из строки адреса - frombody
+        {
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
