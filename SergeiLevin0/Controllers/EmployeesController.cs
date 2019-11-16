@@ -26,10 +26,12 @@ namespace SergeiLevin0.Controllers
             //оба предыдущих элемента для передачи в предстваление каких-то малозначащих данных
             return View(EmployeesList);
         }
-        public IActionResult EmployeeDatails(int id)
+        public IActionResult EmployeeDatails(int? id)
         {
+            if(id is null)  return BadRequest(); 
             EmployeeView employeee = EmployeesList.Find(i => i.Id == id);
-            ViewBag.Title = $"Employee Id{id}";
+            if (employeee is null) return NotFound();
+            //ViewBag.Title = $"Employee Id{id}";
             ViewData["Description"] = "Only one employee";
             return View(employeee);
         }
