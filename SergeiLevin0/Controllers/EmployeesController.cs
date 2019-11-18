@@ -60,10 +60,11 @@ namespace SergeiLevin0.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        public IActionResult Edit(int id) //для выбора редактрования
+        public IActionResult Edit(int? id) //для выбора редактрования; для создания используем отдельный блок действий Create, либо используем null индекс в эдит
         {
-            if (id < 0) return BadRequest();
-            EmployeeView employeee = EmpoyeesData.GetById((int)id);
+            if (id is null) return View(new EmployeeView()); // для создания нового сотрудника вместо Create
+            //if (id < 0) return BadRequest();
+            EmployeeView employeee = EmpoyeesData.GetById((int)id); 
             if (employeee is null) return NotFound();
             return View(employeee);
         }
@@ -72,10 +73,38 @@ namespace SergeiLevin0.Controllers
         public IActionResult Edit(EmployeeView employee) //для отработки сформированных данных, различия только в параметрах недостаточно, нужно разделение по атрибутам
         {
             if (employee is null) throw new ArgumentNullException(nameof(employee));
-            if (!ModelState.IsValid) View(employee);
+            if (!ModelState.IsValid) View(employee); //почему здесь без return???
             int id = employee.Id;
-            EmpoyeesData.Edit(id, employee);
+            if (id == 0) EmpoyeesData.Add(employee);
+            else EmpoyeesData.Edit(id, employee);
             EmpoyeesData.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Create() => View(new EmployeeView());
+
+        [HttpPost]
+        public IActionResult Create(EmployeeView employee)
+        {
+            if (!ModelState.IsValid) return View(employee);
+            EmpoyeesData.SaveChanges();
+            return RedirectToAction("EmployeeDatails", new { employee.Id });
+        }
+
+        public IActionResult Delete( int id) //просто удалять или редактировать нельзя, только черзе HTTPP-запросы (атрибуты) - иначе может произойти несанкциониованное изменене сразу черзе метод
+        {
+            var employee = EmpoyeesData.GetById(id);
+            if (employee is null) return NotFound();
+            return View(employee);
+
+            //EmpoyeesData.Delete((int)id); // пример удаления напрямую - очень плохой вариант
+            //return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            EmpoyeesData.Delete(id);
             return RedirectToAction("Index");
         }
     }

@@ -29,11 +29,14 @@
                 <td><input type="text" value="@employee.SecondName" /></td>
                 <td><input type="text" value="@employee.Age" /></td>
                 <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
-                <td><a asp-action="Edit" asp-route-id="@employee.Id"><i class="fa fa-user-edit"></i>Edit</a></td><!--проблемы с шрифтовой иконкой-->
+                <td>
+                    <a asp-action="Edit" asp-route-id="@employee.Id"><i class="fa fa-user-edit"></i>Edit</a><!--проблемы с шрифтовой иконкой-->
+                    <a asp-action="Delete" asp-route-id="@employee.Id"><i class="fa fa-trash"></i>Delete</a><!--проблемы с шрифтовой иконкой-->
+                </td>
             </tr>
         }
     </tbody>
 
 </table>
-<input type="submit" value="Delete" />
-<input type="submit" value="Save" />
+<a asp-action="Edit" class="btn btn-success">Create</a><!--выбираем действие - либо Эдит либо Криэйт-->
+<a asp-action="Delete" class="btn btn-success">Delete</a>
