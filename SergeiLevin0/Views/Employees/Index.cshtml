@@ -12,6 +12,7 @@
             <th>SecondName</th>
             <th>Age</th>
             <th>Детали</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
                 <td><input type="text" value="@employee.SecondName" /></td>
                 <td><input type="text" value="@employee.Age" /></td>
                 <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
+                <td><a asp-action="Edit" asp-route-id="@employee.Id"><i class="fa fa-user-edit"></i>Edit</a></td><!--проблемы с шрифтовой иконкой-->
             </tr>
         }
     </tbody>

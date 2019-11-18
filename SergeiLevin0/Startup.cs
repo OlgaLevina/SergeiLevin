@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SergeiLevin0.Infrastructure.Convenctions;
+using SergeiLevin0.Infrastructure.Interfaces;
+using SergeiLevin0.Infrastructure.Servoces;
 
 namespace SergeiLevin0
 {
@@ -22,6 +24,7 @@ namespace SergeiLevin0
         //набиваем сервисами, с которыми в дальнейшем будет работать наше приложение
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IEmpoyeesData, InMemoryEmployeesData>(); //в режиме singleton  - создается только 1 экземляр класса, который будет раздается всем желающим в дальнейшем
             services.AddMvc();//запуск mvc без внесения изменений в конвенции.
             //services.AddMvc(opt => opt.Conventions.Add(new CustomControllerConvention())); //пример внесения изменений в конвенции на этапе старта - то что в скобках мое предположение.
 
@@ -39,7 +42,7 @@ namespace SergeiLevin0
             //app.UseStaticFiles(new StaticFileOptions {ServeUnknownFileTypes = true});//будут подсоединяться любые файлы
             app.UseStaticFiles();//будут подсоединяться файлы стандартного содрежимого, т.е. картинки, html-страницы, css и т.п. 
             app.UseDefaultFiles();
-            app.UseCookiePolicy();//ППО для подстверждения политики куков, особенно в европе
+            //app.UseCookiePolicy();//ППО для подстверждения политики куков, особенно в европе
             //app.UseResponseCaching();//кэширование ответа
             //app.UseResponseCompression();//ППО, которое работает после того, как отработал контроллер, берет сформированные данные и пытается их сжать, чтобы уменьшить объем данных на строне клиента
             
@@ -53,7 +56,7 @@ namespace SergeiLevin0
 
             //app.UseAuthentication();//промежуточное ПО для авторизации. Будет отслеживать заголовки входящих сообщений и искать в них соотвествующие элементы
 
-            app.UseSession();//ППО для использования сессий в приложении
+            //app.UseSession();//ППО для использования сессий в приложении
             //app.UseMvcWithDefaultRoute(); автоматическая конфигурация того, что ниже
             app.UseMvc(routes => // доступ к инфрастуктуре mvc - конфигурирует объект, который добавляется в конвеер, занимается распаковкой данных из запроса, запуском кнтроллеров представлений и отправкой ответов обратно
             {
