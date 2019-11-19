@@ -25,9 +25,9 @@
                 <td>
                     <a asp-controller="Employees" asp-action="DetailsName" asp-route-firstName="@employee.FirstName" asp-route-lastName="@employee.SecondName">@employee.Id</a>
                 </td>
-                <td><input type="text" value="@employee.FirstName" /></td>
-                <td><input type="text" value="@employee.SecondName" /></td>
-                <td><input type="text" value="@employee.Age" /></td>
+                <td>@employee.FirstName </td>
+                <td>@employee.SecondName </td>
+                <td>@employee.Age" </td>
                 <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@employee.Id"><i class="fa fa-user-edit"></i>Edit</a><!--проблемы с шрифтовой иконкой-->
