@@ -13,7 +13,7 @@ namespace SergeiLevin0.Infrastructure.Servoces
         {
             new EmployeeView{Id=0, FirstName = "Ivan", SecondName = "Ivanov", Age = 38, Patronymic = "Ivanovich", Position = "Director", Role = "User"},
             new EmployeeView{Id=1, FirstName = "Petr", SecondName = "Petrov", Age = 25, Patronymic = "Petrovich", Position ="Meneger", Role = "Administrator"},
-            new EmployeeView{Id=2, FirstName = "Sidr", SecondName = "Sidorov", Age = 18, Patronymic = "Sidorovich", Position = "Assistant", Role = "User"}
+            new EmployeeView{Id=2, FirstName = "Sidr", SecondName = "Sidorov", Age = 17, Patronymic = "Sidorovich", Position = "Assistant", Role = "User"}
         };
 
 
@@ -38,7 +38,6 @@ namespace SergeiLevin0.Infrastructure.Servoces
             if (employeeOld is null) return;
             employeeOld.FirstName = employee.FirstName;
             employeeOld.Age = employee.Age;
-            employeeOld.Id = id;
             employeeOld.Patronymic = employee.Patronymic;
             employeeOld.Position = employee.Position;
             employeeOld.Role = employee.Role;

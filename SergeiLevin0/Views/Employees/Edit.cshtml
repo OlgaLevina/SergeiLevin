@@ -1,6 +1,6 @@
 ﻿@model SergeiLevin0.ViewModels.EmployeeView
 @{
-    ViewData["Title"]=$"Edit Employee id: {Model.Id}";
+    ViewData["Title"] = $"Edit Employee id: {Model.Id}";
 }
 
 <h4> @ViewData["Title"]</h4>
@@ -13,12 +13,12 @@
 <form asp-action="Edit" method="post"> <!--указываем метод, с помощью которого будет отправлено форма на сервер; если asp-action не указывать, то действия конролелера будет выбрано, то из которго было создано текущее представление-->
     <div class="row">
         <div class="col-md-4">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div><!--ModelOnly/All/None - чтобы нельзя было напримре ввсети Усама Бен Ладен - валидация модели целиком-->
             <input asp-for="Id" type="hidden" />
             <div class="form-group">
                 <label asp-for="SecondName" class="control-label"></label>
                 <input asp-for="SecondName" class="form-control" />
-                <span asp-validation-for="SecondName" class="text-danger"></span>
+                <span asp-validation-for="SecondName" class="text-danger"></span><!--валидация отдельного свойства модели - серверная валидация, в т.ч.если косячные данные будут переданы сервером ошибка выскочит. Для клиентской валидации - обработка js перед отправкой на сервер, пока будет ошибка - на сервер не уйдет - плюсы - снижение нагрузки на сервер!-->
             </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -52,3 +52,8 @@
         </div>
     </div>
 </form>
+
+@section Scripts
+{
+    <partial name="Partial/_ValidationScriptsPartial" />
+}

@@ -70,12 +70,14 @@ namespace SergeiLevin0.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(EmployeeView employee) //для отработки сформированных данных, различия только в параметрах недостаточно, нужно разделение по атрибутам
+        public IActionResult Edit(EmployeeView employee, bool creat) //для отработки сформированных данных, различия только в параметрах недостаточно, нужно разделение по атрибутам
         {
             if (employee is null) throw new ArgumentNullException(nameof(employee));
-            if (!ModelState.IsValid) View(employee); //почему здесь без return???
+            if (employee.Age < 18) ModelState.AddModelError(nameof(EmployeeView.Age), "must be >= 18");
+            if (employee.FirstName == "Иван" && employee.SecondName == "Грозный" && employee.Patronymic == "Васильевич") ModelState.AddModelError("", "Внимание! Он уже умер!"); //валидаций всей модели
+            if (!ModelState.IsValid) return View(employee);
             int id = employee.Id;
-            if (id == 0) EmpoyeesData.Add(employee);
+            if (creat) EmpoyeesData.Add(employee);
             else EmpoyeesData.Edit(id, employee);
             EmpoyeesData.SaveChanges();
             return RedirectToAction("Index");
