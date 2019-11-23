@@ -1,19 +1,33 @@
-﻿<!DOCTYPE html>
+﻿@{ //ViewData["Title"] = "Главная";
+    Layout = "_LayoutBase";
+    ViewBag.Title="Главная";// - как вариант, сработает последний
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<h1>First view</h1>
-<p>Hello!</p>
-<p>
-    <a href="/home/readconfig">Config?</a> <!--Сссылка на запуск другого представления-->
-    
-</p>
-<p>
-    <a href="/home/getemployees">List of Employees?</a> <!--Сссылка на запуск другого представления-->
-</p>
-</body>
-</html>
+@*{await Html.Partial("Partial/_Slider");//при помощи штмл-хелпера через с#, синхронно}*@
+@*{await Html.PartialAsync("Partial/_Slider");//при помощи штмл-хелпера через с#, лучше асинхронно}*@
+<partial name="Partial/_Slider" /><!--тот же хелпер, но тегом, который работает асинхронно-->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+               <partial name="Partial/_LeftSideBar" />
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <partial name="Partial/_FeaturesItems" />
+                <partial name="Partial/_CategoryTab" />
+                @await Html.PartialAsync("Partial/_RecommendedItems")
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles{
+    <!--Styles-->
+}
+
+@section Scripts{
+    <!--Scripts-->
+}
