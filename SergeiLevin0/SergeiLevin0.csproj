@@ -17,8 +17,13 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\Shared\Components\Categories\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
   </ItemGroup>
 
 </Project>

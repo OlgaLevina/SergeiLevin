@@ -34,7 +34,7 @@ namespace SergeiLevin0
             //в параметрах могут быть не только классы, но и типы!!!
         //2. интегрированные методы расширения, включает в себя уже все, что нужно.  
             //services.AddSession(); // сервис к app.UseSession()
-
+            services.AddScoped<IProductData,InMemoryProductData>();
             services.AddMvc();//запуск mvc без внесения изменений в конвенции.
             //services.AddMvc(opt => opt.Conventions.Add(new CustomControllerConvention())); //пример внесения изменений в конвенции на этапе старта - то что в скобках мое предположение.
 
