@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace SergeiLevin0.Components
 {
     //[ViewComponent(Name ="Category")] - замена наследованию от ViewComponent
-    public class CategoryViewComponent: ViewComponent //позволяет создать визуальной компоненс с именем Category
+    public class CategoriesViewComponent: ViewComponent //позволяет создать визуальной компоненс с именем Category
     {
         private readonly IProductData ProductData;
 
-        public CategoryViewComponent(IProductData productData) { ProductData = productData; }
+        public CategoriesViewComponent(IProductData productData) { ProductData = productData; }
 
         //метод обнаруживается с помощью рефлексии внутри класса 
-        public IViewComponentResult Invoke() => View(); //синхронная реализация
+        public IViewComponentResult Invoke() => View(GetCategories()); //синхронная реализация
         //public async Task<IViewComponentResult> InvokeAsync() => View(); //асинхронная реализация - тип реалищации выбирается в зависимости от назначения компонента
 
         private IEnumerable<CategoryViewModel> GetCategories()

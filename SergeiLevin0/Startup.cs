@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Infrastructure.Interfaces;
-using SergeiLevin0.Infrastructure.Servoces;
+using SergeiLevin0.Infrastructure.Services;
 
 namespace SergeiLevin0
 {

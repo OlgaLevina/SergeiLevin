@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.Infrastructure.Servoces
+namespace SergeiLevin0.Infrastructure.Services
 {
     public class InMemoryEmployeesData : IEmpoyeesData
     {

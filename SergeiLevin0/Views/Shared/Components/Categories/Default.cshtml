@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+<h2>Category</h2>
+<div class="panel-group category-products" id="accordian">
+    <!--category-productsr-->
+    @foreach (var parent_category in Model)
+    {
+        if (parent_category.ChildCategories.Count > 0)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#@parent_category.Name.ToLower()">
+                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                            @parent_category.Name
+                        </a>
+                    </h4>
+                </div>
+                <div id="@parent_category.Name.ToLower()" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var child_category in parent_category.ChildCategories)
+                            {
+                                <li><a href="">@child_category.Name </a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a href="#">@parent_category.Name</a></h4>
+                </div>
+            </div>
+        }
+    }
+</div><!--/category-productsr-->
