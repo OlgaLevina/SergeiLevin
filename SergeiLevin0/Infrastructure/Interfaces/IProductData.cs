@@ -10,5 +10,6 @@ namespace SergeiLevin0.Infrastructure.Interfaces
     {
         IEnumerable<Category> GetCategories();
         IEnumerable<Brand> GetBrands();
+        IEnumerable<Product> GetProducts(ProductFilter filter=null);
     }
 }

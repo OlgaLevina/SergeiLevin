@@ -13,5 +13,16 @@ namespace SergeiLevin0.Infrastructure.Services
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
 
         public IEnumerable<Category> GetCategories() => TestData.Categories;
+
+        public IEnumerable<Product> GetProducts(ProductFilter filter = null)
+        {
+            var query = TestData.Products;
+            if (filter?.CategoryId != null)
+                query = query.Where(product => product.CategoryId == filter.CategoryId);
+            if (filter?.BrandId != null)
+                query = query.Where(product => product.BrandId == filter.BrandId);
+            return query;
+        }
+
     }
 }
