@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLevin0", "SergeiLevin0\SergeiLevin0.csproj", "{DD10F1B4-3F2C-426E-BAE3-4DA15AD83CC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLevin0.Domain", "SergeiLevin0.Domain\SergeiLevin0.Domain.csproj", "{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLevin0.Domain", "SergeiLevin0.Domain\SergeiLevin0.Domain.csproj", "{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
