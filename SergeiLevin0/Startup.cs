@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SergeiLevin0.DAL.Context;
+using SergeiLevin0.Data;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
@@ -28,6 +29,7 @@ namespace SergeiLevin0
          //все вервисы должны быть зарегистрированы в контейнере!!
             //есть подход по проектированию взаимодействия с базами данных, когда пишуться изолированные контексты. В этом случае в приложении может быть несколько контекстов. Между собо они могут быть связаны внешними ключами между таблицами или не свяаны. При этом описываются несколько классов с контектами данных и каждый из них регистрируется, как ниже. Это может понадобиться, если в одном контексте храняться, например, данные пользователей, а в другом данные товаров. Контексты не связаны между собой, могут разрабатываться и тестироваться по отдельности. При этом сами БД могут лежать на разных серверах, либо это может быть 1 БД, к которой формируются 2 контекста
             services.AddDbContext<SergeiLevinContext>(opt=>opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//здесь можно добавлять к строке подключания данные логина и пароля, чтобы не размещать их в файле конфигурации приложения, здесь же можно менять иные параметры строки подключения
+            services.AddTransient<SergeiLevinContextInitializer>();
             // методы добавления сервисов:
             //1. самостоятельное добавление сервисов:
             services.AddSingleton<IEmpoyeesData, InMemoryEmployeesData>(); //в режиме singleton  - создается только 1 экземляр класса (единого объекта на все время жизни приложения с момента 1го обращения к нему), который будет раздается всем желающим в дальнейшем; можно регитриовтаь просто класс без интерфейса!
@@ -43,8 +45,10 @@ namespace SergeiLevin0
         }
 
         //содержит промежуточное ПО, которое добавляется к нашему приложению через app.Use..., и формируют конвеер обработки входящих запросов в той послеовательности, как добавленяется.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IEmpoyeesData data) //в параметрах можно указать зарегистрированные сервисы, например IEmpoyeesData; сервисы можно заправшивать так же в контроллерах  и других частях приложения
+        //потом удалить параметр data или переделать!!!!
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IEmpoyeesData data, SergeiLevinContextInitializer db) //в параметрах можно указать зарегистрированные сервисы, например IEmpoyeesData; сервисы можно заправшивать так же в контроллерах  и других частях приложения
         {
+            db.InitializeAsync().Wait();//инициализация нашей базы
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //ПО занимающиеея отслеживанием ошибок - позволяет отселдить, что не так
