@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SergeiLevin0.DAL.Context;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
@@ -19,15 +21,14 @@ namespace SergeiLevin0
 
         public Startup(IConfiguration Config) => Configuration = Config;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         //набиваем сервисами, с которыми в дальнейшем будет работать наше приложение
         public void ConfigureServices(IServiceCollection services) // станадртный конетейнер может быть заменен на контейнер сторонних разработчиков - как с см. в инете
         {// недостаток стандартнгого контейнера - то что он конфигурирвуется в виде кода, не станадартные позволяют делать это в виде xml- конфигурации, который прикладывается к проекту и без перекомпеляции вносит изменения
          //контейнер сервисов представляет их коллекцюю IServiceCollection services
          //все вервисы должны быть зарегистрированы в контейнере!!
-         // методы добавления сервисов:
-         //1. самостоятельное добавление сервисов:
+            services.AddDbContext<SergeiLevinContext>(opt=>opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//здесь можно добавлять к строке подключания данные логина и пароля, чтобы не размещать их в файле конфигурации приложения, здесь же можно менять иные параметры строки подключения
+            // методы добавления сервисов:
+            //1. самостоятельное добавление сервисов:
             services.AddSingleton<IEmpoyeesData, InMemoryEmployeesData>(); //в режиме singleton  - создается только 1 экземляр класса (единого объекта на все время жизни приложения с момента 1го обращения к нему), который будет раздается всем желающим в дальнейшем; можно регитриовтаь просто класс без интерфейса!
             //services.AddTransient<>(); //один отдельный объект сосздается при каждом запросе.
             //services.AddScoped<>();//один отельный объект на время обработки одного входящего запроса (жизни области), что-то типа using
