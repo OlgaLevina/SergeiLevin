@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLevin0", "SergeiLevin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLevin0.Domain", "SergeiLevin0.Domain\SergeiLevin0.Domain.csproj", "{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLevin0.DAL", "SergeiLevin0.DAL\SergeiLevin0.DAL.csproj", "{475C6669-7068-4DAD-BD8E-8ED9049B4A82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C61B5AF3-B9D5-4256-A900-A3236B91EBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475C6669-7068-4DAD-BD8E-8ED9049B4A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475C6669-7068-4DAD-BD8E-8ED9049B4A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475C6669-7068-4DAD-BD8E-8ED9049B4A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475C6669-7068-4DAD-BD8E-8ED9049B4A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
