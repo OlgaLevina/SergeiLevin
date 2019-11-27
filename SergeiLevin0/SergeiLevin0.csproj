@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SergeiLevin0.DAL\SergeiLevin0.DAL.csproj" />
     <ProjectReference Include="..\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
   </ItemGroup>
 
