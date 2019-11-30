@@ -41,11 +41,27 @@ namespace SergeiLevin0.Controllers
             {
                 ModelState.AddModelError("", error.Description);
             }
-            return View();
+            return View(Model);
         } 
 
 
-        public IActionResult Login() => View();
-
+        public IActionResult Login() => View(new LoginViewModel() );
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel Model)
+        {
+            if (!ModelState.IsValid) return View(Model);
+            var login_result = await SignInManager.PasswordSignInAsync(
+                Model.UserName, 
+                Model.Password,
+                Model.RememberMe,
+                false);//блокировка в случае максимального кол-ва ошибок - пока отключена, потом исправить на true!!!!
+            if (login_result.Succeeded)
+            {
+                if (Url.IsLocalUrl(Model.ReturnUrl)) return Redirect(Model.ReturnUrl);
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("", "неверные имя или паролль");
+            return View(Model);
+        }
     }
 }
