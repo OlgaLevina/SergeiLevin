@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SergeiLevin0.DAL.Context;
 using SergeiLevin0.Data;
+using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
@@ -40,6 +42,42 @@ namespace SergeiLevin0
             //services.AddSession(); // сервис к app.UseSession()
            // services.AddScoped<IProductData,InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+            //сервис идентификации; можно вместо своего класса использовать базовый, например. - IdentityRole
+            services.AddIdentity<Use, Role>()
+                .AddEntityFrameworkStores<SergeiLevinContext>()//поставщики данных регистрируем через систему ЭнтитиФрэймВорк - добавляем место хранения данных (
+                .AddDefaultTokenProviders();//регистрируем основных поставщиков (менеджеров)
+            services.Configure<IdentityOptions>(opt => 
+            {
+                opt.Password.RequiredLength = 3;//устанавливаем требования к данным, например политику паролей (для новый пользоватедей или смены паролей)
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredUniqueChars = 3;//требование к уникальности символов в пароле 
+
+                opt.Lockout.AllowedForNewUsers = true;//иначе, новые пользователи автоматически блокируются и только администратор может их разблокировать - подтверждение регистрации администратором
+                opt.Lockout.MaxFailedAccessAttempts = 10;//кол-во неудачных попыток ввода данных пароль-логин
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);//тайм-оut блокировки пользователя после максимального количества неудачных попыток ввода данных пароль-логин
+
+                opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmйцукенгшщзхъфывапролджэячсмитьбю1234567890";//список всех доступных символов для паролей
+                opt.User.RequireUniqueEmail = false;//отключение уникальности мэйлов (логинов) - важно на этапе отладки
+
+                //просмотреть другие возможности на этапе своего!!!
+            });//после регистрации - сконфигурировать сервисы
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "SergeiLevin-Identity";//название куков, которые будут храниться в браузере
+                opt.Cookie.HttpOnly = true;//передача только по штп протоколу
+                opt.Cookie.Expiration = TimeSpan.FromDays(180);//время жизни кукув
+
+                opt.LoginPath = "/Account/Login";//контроллер сдействием Логин, куда будет перенаправлен пользователь для входа в разделы, требующие авторизации 
+                opt.LogoutPath = "/Account/LogOut";//контролллер и действие для выхода пользователя из системы
+                opt.AccessDeniedPath = "/Account/AccessDenieded";//перенапрвление к контроллекру для отказа в доступе
+
+                opt.SlidingExpiration = true;//автоматическая регистрация смены пользователем состояния из незарегистрированного в  регистрированное (изменнеие идентификатора сеанса)
+
+            });//после конфигурации  - подключить систему идентификации в конвеер (в общем методе конфигурации)
             services.AddMvc();//запуск mvc без внесения изменений в конвенции.
             //services.AddMvc(opt => opt.Conventions.Add(new CustomControllerConvention())); //пример внесения изменений в конвенции на этапе старта - то что в скобках мое предположение.
 
@@ -59,7 +97,9 @@ namespace SergeiLevin0
             //app.UseStaticFiles(new StaticFileOptions {ServeUnknownFileTypes = true});//будут подсоединяться любые файлы
             app.UseStaticFiles();//будут подсоединяться файлы стандартного содрежимого, т.е. картинки, html-страницы, css и т.п. 
             app.UseDefaultFiles();
-            //app.UseCookiePolicy();//ППО для подстверждения политики куков, особенно в европе
+            app.UseCookiePolicy();//ППО для подстверждения политики куков, особенно в европе
+
+            app.UseAuthentication();//включаем идентификацию в конвеер - все, что выше - будет выполняться без нее, все что ниже - уже под ее контрлем!
             //app.UseResponseCaching();//кэширование ответа
             //app.UseResponseCompression();//ППО, которое работает после того, как отработал контроллер, берет сформированные данные и пытается их сжать, чтобы уменьшить объем данных на строне клиента
 
@@ -73,7 +113,7 @@ namespace SergeiLevin0
 
             //app.UseAuthentication();//промежуточное ПО для авторизации. Будет отслеживать заголовки входящих сообщений и искать в них соотвествующие элементы
 
-            //app.UseSession();//ППО для использования сессий в приложении - К этому промежуточному ПО надо добавить его сервисы в контейнер.!!
+            app.UseSession();//ППО для использования сессий в приложении - К этому промежуточному ПО надо добавить его сервисы в контейнер.!!
             //app.UseMvcWithDefaultRoute(); автоматическая конфигурация того, что ниже
             app.UseMvc(routes => // доступ к инфрастуктуре mvc - конфигурирует объект, который добавляется в конвеер, занимается распаковкой данных из запроса, запуском кнтроллеров представлений и отправкой ответов обратно
             {
