@@ -45,7 +45,7 @@ namespace SergeiLevin0.Controllers
         } 
 
 
-        public IActionResult Login() => View(new LoginViewModel() );
+        public IActionResult Login(string returnUrl) => View(new LoginViewModel {ReturnUrl=returnUrl} );
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel Model)
         {
@@ -62,6 +62,13 @@ namespace SergeiLevin0.Controllers
             }
             ModelState.AddModelError("", "неверные имя или паролль");
             return View(Model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]//т.к. у нас это httppost, то соответствующий пунтк меню нужно переделать в форму!
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
