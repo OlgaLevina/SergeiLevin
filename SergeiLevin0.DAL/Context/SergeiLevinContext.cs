@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SergeiLevin0.DAL.Context
 {
-    public class SergeiLevinContext: IdentityDbContext<Use, Role, string > //DbContext -  после добавления идентификации - заменяем с учетом идентификации. Если используем только пользователей, то добавляем просто User. Для ролей нужно добавить еще и класс первичного ключа
+    public class SergeiLevinContext: IdentityDbContext<User, Role, string > //DbContext -  после добавления идентификации - заменяем с учетом идентификации. Если используем только пользователей, то добавляем просто User. Для ролей нужно добавить еще и класс первичного ключа
     {
         //описываем таблицы, которые должны быть в базе - т.к. конфигурируем наш Context
         public DbSet<Brand> Brands { get; set; }

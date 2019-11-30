@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SergeiLevin0.Domain.Entities.Identity
 {
-    public class Use:IdentityUser
+    public class User:IdentityUser
     {
         public string Descriprion { get; set; }
     }
