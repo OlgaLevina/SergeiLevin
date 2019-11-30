@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.ViewModels;
@@ -10,6 +11,7 @@ using SergeiLevin0.ViewModels;
 namespace SergeiLevin0.Controllers
 {
     //[Route("Users")] // новый маршрут для контроллера целиком, но для него нужно перенести представление в папку Users
+    [Authorize]//доступ только дл авторизованных пользователей
     public class EmployeesController : Controller
     {
         private readonly IEmpoyeesData EmpoyeesData;
