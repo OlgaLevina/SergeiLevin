@@ -19,7 +19,7 @@ namespace SergeiLevin0.ViewModels.Idntity
         [Required]
         [DataType(DataType.Password)]
         [Display(Name ="Подтвердите введенный пароль")]
-        [Compare(nameof(Password))] //автоматическое сравнение корректности двух паролей
+        [Compare(nameof(Password))] //автоматическое сравнение корректности двух полей
         public string ConfirmPassword { get; set; }
     }
 }
