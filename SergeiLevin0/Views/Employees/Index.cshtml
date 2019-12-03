@@ -12,31 +12,40 @@
             <th>SecondName</th>
             <th>Age</th>
             <th>Детали</th>
-            <th></th>
+            @if (User.IsInRole(Role.Administrator))//либо закрываем польностью, либо используем атрибуты авторизации - см.контроллер Employees
+            {
+                <th></th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var employee in Model)
         {
-            <tr>
-                <td>
-                    <input type="checkbox" value="@employee.Id" />
-                </td>
-                <td>
-                    <a asp-controller="Employees" asp-action="DetailsName" asp-route-firstName="@employee.FirstName" asp-route-lastName="@employee.SecondName">@employee.Id</a>
-                </td>
-                <td>@employee.FirstName </td>
-                <td>@employee.SecondName </td>
-                <td>@employee.Age" </td>
-                <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
+        <tr>
+            <td>
+                <input type="checkbox" value="@employee.Id" />
+            </td>
+            <td>
+                <a asp-controller="Employees" asp-action="DetailsName" asp-route-firstName="@employee.FirstName" asp-route-lastName="@employee.SecondName">@employee.Id</a>
+            </td>
+            <td>@employee.FirstName </td>
+            <td>@employee.SecondName </td>
+            <td>@employee.Age" </td>
+            <td><a asp-controller="Employees" asp-action="EmployeeDatails" asp-route-id="@employee.Id">About employee @employee.Id</a></td>
+            @if (User.IsInRole(Role.Administrator))
+            {
                 <td>
                     <a asp-action="Edit" asp-route-id="@employee.Id"><i class="fa fa-user-edit"></i>Edit</a><!--проблемы с шрифтовой иконкой-->
                     <a asp-action="Delete" asp-route-id="@employee.Id"><i class="fa fa-trash"></i>Delete</a><!--проблемы с шрифтовой иконкой-->
                 </td>
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 
 </table>
-<a asp-action="Edit" asp-route-creat="true" class="btn btn-success">Create</a><!--выбираем действие - либо Эдит либо Криэйт-->
-<a asp-action="Delete" class="btn btn-success">Delete</a>
+@if (User.IsInRole(Role.Administrator))
+{
+    <a asp-action="Edit" asp-route-creat="true" class="btn btn-success">Create</a><!--выбираем действие - либо Эдит либо Криэйт-->
+    <a asp-action="Delete" class="btn btn-success">Delete</a>
+}

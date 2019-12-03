@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.ViewModels;
 
@@ -61,7 +62,7 @@ namespace SergeiLevin0.Controllers
         //{
         //    return RedirectToAction(nameof(Index));
         //}
-
+        [Authorize(Roles =Role.Administrator)]//ограничиваем доступ - только администратор
         public IActionResult Edit(int? id) //для выбора редактрования; для создания используем отдельный блок действий Create, либо используем null индекс в эдит
         {
             if (id is null) return View(new EmployeeView()); // для создания нового сотрудника вместо Create
@@ -70,7 +71,7 @@ namespace SergeiLevin0.Controllers
             if (employeee is null) return NotFound();
             return View(employeee);
         }
-
+        [Authorize(Roles = Role.Administrator)]
         [HttpPost]
         public IActionResult Edit(EmployeeView employee, bool creat) //для отработки сформированных данных, различия только в параметрах недостаточно, нужно разделение по атрибутам
         {
@@ -95,6 +96,7 @@ namespace SergeiLevin0.Controllers
             return RedirectToAction("EmployeeDatails", new { employee.Id });
         }
 
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete( int id) //просто удалять или редактировать нельзя, только черзе HTTPP-запросы (атрибуты) - иначе может произойти несанкциониованное изменене сразу черзе метод
         {
             var employee = EmpoyeesData.GetById(id);
@@ -105,11 +107,13 @@ namespace SergeiLevin0.Controllers
             //return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Role.Administrator)]//если указать роли через запятую - то значит пользователь должен удовлетворять им всем одновременно, а есть указать несколько атрибутов, то будет доступ у всех указанных ролей (либо наоборот - проверить)
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             EmpoyeesData.Delete(id);
             return RedirectToAction("Index");
         }
+
     }
 }

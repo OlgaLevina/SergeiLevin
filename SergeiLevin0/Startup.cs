@@ -59,7 +59,7 @@ namespace SergeiLevin0
                 opt.Lockout.MaxFailedAccessAttempts = 10;//кол-во неудачных попыток ввода данных пароль-логин
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);//тайм-оut блокировки пользователя после максимального количества неудачных попыток ввода данных пароль-логин
 
-                opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmйцукенгшщзхъфывапролджэячсмитьбю1234567890";//список всех доступных символов для имен
+                opt.User.AllowedUserNameCharacters = "QWERTYUIOPASDFGHJKLZXCVBNMЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮqwertyuiopasdfghjklzxcvbnmйцукенгшщзхъфывапролджэячсмитьбю1234567890";//список всех доступных символов для имен
                 opt.User.RequireUniqueEmail = false;//отключение уникальности мэйлов (логинов) - важно на этапе отладки
 
                 //просмотреть другие возможности на этапе своего!!!

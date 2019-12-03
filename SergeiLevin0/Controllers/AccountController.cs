@@ -23,6 +23,13 @@ namespace SergeiLevin0.Controllers
             Loger = loger;
         }
 
+        public async Task<IActionResult> IsNameFree(string UserName)
+        {
+            var user = await UserManager.FindByNameAsync(UserName);
+            if (user is null) return Json("true");
+            return Json("Пользователь с таким именем уже существует!");
+        }
+
         public IActionResult Register() => View(new RegisterUserViewModel());//доступ через get-запрос
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -38,6 +45,7 @@ namespace SergeiLevin0.Controllers
             var registration_result = await UserManager.CreateAsync(user, Model.Password);
             if (registration_result.Succeeded)
             {
+                await UserManager.AddToRoleAsync(user, Role.User);//наделение нового пользователя правами пользователя
                 Loger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
                 await SignInManager.SignInAsync(user, false);
                 Loger.LogInformation($"Пользователь {Model.UserName} вошел в систему");
@@ -80,5 +88,7 @@ namespace SergeiLevin0.Controllers
             Loger.LogInformation($"Пользователь {User.Identity.Name} вышел в систему");
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult AccessDenieded() => View();
     }
 }
