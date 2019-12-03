@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using SergeiLevin0.Domain.Entities;
 using SergeiLevin0.Infrastructure.Interfaces;
 using SergeiLevin0.Models;
 using SergeiLevin0.ViewModels;
@@ -12,7 +13,7 @@ namespace SergeiLevin0.Infrastructure.Services
 {
     public class CookieCartService : ICartService
     {
-        private string CartName;
+        private readonly string CartName;
         private readonly IProductData ProductData;
         private readonly IHttpContextAccessor HttpContextAccessor;
         private Cart Cart
@@ -50,27 +51,61 @@ namespace SergeiLevin0.Infrastructure.Services
 
         public void AddToCart(int id)
         {
-            throw new NotImplementedException();
+            var cart=Cart;
+            var item = cart.Items.FirstOrDefault(i => i.Productid == id);
+            if (item is null) cart.Items.Add(new CartItem { Productid = id, Quantity = 1 });
+            else item.Quantity++;
+            Cart = cart;
         }
 
-        public void DecrementFromCart(int id)
+        public void DecrimentFromCart(int id)
         {
-            throw new NotImplementedException();
+            var cart = Cart;
+            var item = cart.Items.FirstOrDefault(i => i.Productid == id);
+            if (item is null) return;
+            if(item.Quantity>0) item.Quantity--;
+            if (item.Quantity == 0) cart.Items.Remove(item);
+            Cart = cart;
         }
 
         public void RemoveAll()
         {
-            throw new NotImplementedException();
+            var cart = Cart;
+            cart.Items.Clear();
+            Cart = cart;
         }
 
         public void RemoveFromCart(int id)
         {
-            throw new NotImplementedException();
+            var cart = Cart;
+            var item = cart.Items.FirstOrDefault(i => i.Productid == id);
+            if (item is null) return;
+            cart.Items.Remove(item);
+            Cart = cart;
         }
 
         public CartViewModel TransformFromCart()
         {
-            throw new NotImplementedException();
+            var products = ProductData.GetProducts(new ProductFilter
+            {
+                Ids = Cart.Items.Select(item => item.Productid).ToList()
+            });
+            var products_view_models = products.Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Order = p.Order,
+                ImageUrl = p.ImageUrl,
+                Brand = p.Brand?.Name
+            });
+            return new CartViewModel
+            {
+                Items = Cart.Items.ToDictionary(
+                    x => products_view_models.First(p => p.Id == x.Productid),
+                    x => x.Quantity
+                    )
+            };
         }
     }
 }
