@@ -33,9 +33,19 @@ namespace SergeiLevin0.Controllers
                 }).OrderBy(product => product.Order)
             });
         }
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetails(int id)
         {
-            return View();
+            var product = ProductData.GetProductById(id);
+            if (product is null) return NotFound();
+            return View(new ProductViewModel
+            {
+                Id =product.Id,
+                Name=product.Name,
+                Price=product.Price,
+                ImageUrl=product.ImageUrl,
+                Order=product.Order,
+                Brand=product.Brand?.Name
+            });
         }
 
     }

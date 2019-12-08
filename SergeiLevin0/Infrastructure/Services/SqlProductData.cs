@@ -36,5 +36,9 @@ namespace SergeiLevin0.Infrastructure.Services
                 query = query.Where(product => product.BrandId == filter.BrandId);
             return query.AsEnumerable();//query.ToArray() - можно вместо asenumerable
         }
+        public Product GetProductById(int id) => Db.Products
+            .Include(p =>p.Brand)
+            .Include(p => p.Category)
+            .FirstOrDefault(p => p.Id == id);
     }
 }

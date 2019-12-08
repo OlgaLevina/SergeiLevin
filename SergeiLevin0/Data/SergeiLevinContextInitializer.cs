@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SergeiLevin0.DAL.Context;
+using SergeiLevin0.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,15 @@ namespace SergeiLevin0.Data
     public class SergeiLevinContextInitializer //его нужно зарегистрировать в сервисах стратапа
     {
         private readonly SergeiLevinContext Db;
+        private readonly UserManager<User> UserManager;
+        private readonly RoleManager<Role> RoleManager;
 
-        public SergeiLevinContextInitializer(SergeiLevinContext db) => Db = db;
+        public SergeiLevinContextInitializer(SergeiLevinContext db, UserManager<User> userManager, RoleManager<Role> roleManager)//в методичке иначе - здесь проще
+        {
+            Db = db;
+            UserManager = userManager;
+            RoleManager = roleManager;
+        }
 
         public async Task InitializeAsync()//инициализатор бд следит за тем, чтобы она существовала и имела данные
         {
@@ -20,6 +29,7 @@ namespace SergeiLevin0.Data
             //if (await Db.Database.EnsureCreatedAsync()) { }//проверка на созданность, система автоматически создает бд и возвращает тру, если все прошло успешно
             var db = Db.Database;
             await db.MigrateAsync();//автоматическое содание базы и выполнить все имеющиеся миграции до последней версии
+            await IdentityInicialiseAsync();//запуск идентификации
             if (await Db.Products.AnyAsync()) return;//если в продуктах есть что-нибудь, то не инициализируем базу. Можно использовать другой признак для отказа от инициализации
             using (var transaction =await Db.Database.BeginTransactionAsync())
             {
@@ -50,5 +60,37 @@ namespace SergeiLevin0.Data
             }
 
         }
+
+        private async Task IdentityInicialiseAsync()
+        {
+            //if(!await RoleManager.RoleExistsAsync(Role.Administrator)) 
+            //{
+            //    await RoleManager.CreateAsync(new Role {Name=Role.Administrator });
+            //}
+            await CheckRoleAsync(Role.Administrator);//если роль отсутствует - создаем
+            await CheckRoleAsync(Role.User);
+            if (await UserManager.FindByNameAsync(User.Administrator) is null)
+            {
+                var admin = new User
+                {
+                    UserName = User.Administrator,
+                    //Email="administrarot.com" 
+                };
+                var creation_result = await UserManager.CreateAsync(admin, User.AdminPasswordDefault);
+                if(creation_result.Succeeded)
+                    await UserManager.AddToRoleAsync(admin, Role.Administrator);//добавляем, если отсутствует
+                else
+                    throw new InvalidOperationException($"Ошибка при создании администратора в БД {string.Join(", ", creation_result.Errors.Select(e => e.Description))}");
+            }
+        }
+
+        private async Task CheckRoleAsync(string role)
+        {
+            if (!await RoleManager.RoleExistsAsync(role))
+            {
+                await RoleManager.CreateAsync(new Role { Name = role });
+            }
+        }
+
     }
 }

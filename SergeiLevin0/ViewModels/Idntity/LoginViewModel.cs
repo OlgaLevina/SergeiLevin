@@ -17,7 +17,7 @@ namespace SergeiLevin0.ViewModels.Idntity
         [DataType(DataType.Password)]//указываем, что это пароль и его нужно скрыть звездочками
         [Display(Name = "Пароль")]
         public string Password { get; set; }
-        [Display(Name = "Запомнить?")]
+        [Display(Name = "Запомнить!")]
         public bool RememberMe { get; set; }
         [HiddenInput(DisplayValue =false)]//скрытый элемент управления
         public string ReturnUrl { get; set; }//если пользователь попытался войти в недоступную область и был перенаправлен на форму авторизации, то сохраняем инфу, куда он хотел войти, чтобы его после авторизации туда перенаправить
