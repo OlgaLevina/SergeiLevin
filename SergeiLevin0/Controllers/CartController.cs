@@ -8,6 +8,7 @@ using SergeiLevin0.ViewModels;
 
 namespace SergeiLevin0.Controllers
 {
+    //!!!см. пример в AccountController. В реальном проекте все контроллеры, которые каким-то образом изменяют данные, должны выполнять логирование своих действий. То, что в итоге будет попадать в лог-файл(-сервер) регулируется файлом конфигурации.
     public class CartController : Controller
     {
         private ICartService CartService;

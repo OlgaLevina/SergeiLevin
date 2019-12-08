@@ -138,3 +138,4 @@ namespace SergeiLevin0
         }
     }
 }
+//!!!!Здесь в скрипте надо поправить:jQuery(function($){'use strict';... И везде после 'use strict' должна стоять точка с запятой, а не запятая.

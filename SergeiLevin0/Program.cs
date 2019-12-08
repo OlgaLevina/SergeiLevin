@@ -19,6 +19,7 @@ namespace SergeiLevin0
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.UseUrls("http://0.0.0.0:8080")//http://localhost:8080/ - подключение к сайту через порт; подключение с телефона - https://remontka.pro/connect-android-windows-lan/; https://issue.life/questions/48262739
                 .UseStartup<Startup>();
     }
 }
