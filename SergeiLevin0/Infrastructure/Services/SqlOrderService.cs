@@ -57,7 +57,7 @@ namespace SergeiLevin0.Infrastructure.Services
             .Include(order => order.OrderItems)
             .FirstOrDefault(order => order.Id == id);
 
-        public IEnumerable<Order> GetOrders(string userName) => Db.Orders
+        public IEnumerable<Order> GetUserOrders(string userName) => Db.Orders
             .Include(order => order.User)
             .Include(order => order.OrderItems)
             .Where(order => order.User.UserName == userName);

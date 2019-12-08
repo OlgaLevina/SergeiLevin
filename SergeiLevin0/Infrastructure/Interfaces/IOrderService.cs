@@ -9,7 +9,7 @@ namespace SergeiLevin0.Infrastructure.Interfaces
 {
     public interface IOrderService
     {
-        IEnumerable<Order> GetOrders(string UserName);
+        IEnumerable<Order> GetUserOrders(string UserName);
         Order GetOrderById(int id);
         Order CreateOrder(OrderViewModel OrderModel, CartViewModel CartModel, string UserName);
     }
