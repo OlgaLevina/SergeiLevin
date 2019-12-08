@@ -43,6 +43,7 @@ namespace SergeiLevin0
            // services.AddScoped<IProductData,InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, CookieCartService>();
+            services.AddScoped<IOrderService, SqlOrderService>();
             //сервис идентификации; можно вместо своего класса использовать базовый, например. - IdentityRole
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<SergeiLevinContext>()//поставщики данных регистрируем через систему ЭнтитиФрэймВорк - добавляем место хранения данных (
