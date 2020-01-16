@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SergeiLevin0.ServiceHosting.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/Values")]//можно прописать вручную 
     [ApiController]
     public class ValuesController : ControllerBase
     {
