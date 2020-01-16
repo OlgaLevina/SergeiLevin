@@ -33,7 +33,7 @@ namespace SergeiLevin0.Infrastructure.Services
                     Date = DateTime.Now
                 };
                 Db.Orders.Add(order);
-                foreach (var(product_model, quantity) in cartModel.Items)//(product, quantity) -декомпозиция
+                foreach (var(product_model, quantity) in cartModel.Items)//(product, quantity) -декомпозиция - есть дот.нет коре, но отсутствует в стандарте, поэтому нужно сделать ее самостоятельно
                 {
                     var product = Db.Products.FirstOrDefault(p => p.Id == product_model.Id);
                     if (product is null)

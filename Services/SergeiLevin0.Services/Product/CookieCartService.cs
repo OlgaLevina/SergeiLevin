@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.Infrastructure.Services
+namespace SergeiLevin0.Services
 {
     public class CookieCartService : ICartService
     {

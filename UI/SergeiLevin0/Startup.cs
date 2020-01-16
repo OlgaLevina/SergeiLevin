@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SergeiLevin0.DAL.Context;
-using SergeiLevin0.Data;
+using SergeiLevin0.Services;
 using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Interfaces;
