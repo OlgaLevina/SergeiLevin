@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SergeiLevin0.Models
+namespace SergeiLevin0.Domain.Models
 {
     public class Cart
     {

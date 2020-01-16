@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.ViewModels.Idntity
+namespace SergeiLevin0.Domain.ViewModels.Idntity
 {
     public class LoginViewModel
     {
@@ -19,7 +19,7 @@ namespace SergeiLevin0.ViewModels.Idntity
         public string Password { get; set; }
         [Display(Name = "Запомнить!")]
         public bool RememberMe { get; set; }
-        [HiddenInput(DisplayValue =false)]//скрытый элемент управления
+        //[HiddenInput(DisplayValue =false)]//скрытый элемент управления
         public string ReturnUrl { get; set; }//если пользователь попытался войти в недоступную область и был перенаправлен на форму авторизации, то сохраняем инфу, куда он хотел войти, чтобы его после авторизации туда перенаправить
     }
 }

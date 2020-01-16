@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SergeiLevin0.Domain.Entities.Identity;
-using SergeiLevin0.Infrastructure.Interfaces;
+using SergeiLevin0.Interfaces;
 
 namespace SergeiLevin0.Areas.Admin.Controllers
 {

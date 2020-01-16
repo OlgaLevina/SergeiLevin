@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Headers;
-using SergeiLevin0.ViewModels;
+using SergeiLevin0.Domain.ViewModels;
 
 namespace SergeiLevin0.Controllers
 {

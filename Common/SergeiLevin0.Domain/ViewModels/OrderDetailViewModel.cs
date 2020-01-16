@@ -1,4 +1,4 @@
-﻿namespace SergeiLevin0.ViewModels
+﻿namespace SergeiLevin0.Domain.ViewModels
 {
     /// <summary>
     /// Полная модель-представления для представления корзины, 

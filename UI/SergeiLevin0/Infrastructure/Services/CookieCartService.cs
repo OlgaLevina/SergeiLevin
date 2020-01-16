@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using SergeiLevin0.Domain.Entities;
-using SergeiLevin0.Infrastructure.Interfaces;
-using SergeiLevin0.Models;
-using SergeiLevin0.ViewModels;
+using SergeiLevin0.Interfaces;
+using SergeiLevin0.Domain.Models;
+using SergeiLevin0.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

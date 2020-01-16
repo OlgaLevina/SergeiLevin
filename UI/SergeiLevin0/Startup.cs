@@ -13,7 +13,7 @@ using SergeiLevin0.DAL.Context;
 using SergeiLevin0.Data;
 using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Convenctions;
-using SergeiLevin0.Infrastructure.Interfaces;
+using SergeiLevin0.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
 
 namespace SergeiLevin0

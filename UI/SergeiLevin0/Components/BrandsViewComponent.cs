@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SergeiLevin0.Infrastructure.Interfaces;
-using SergeiLevin0.ViewModels;
+using SergeiLevin0.Interfaces;
+using SergeiLevin0.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

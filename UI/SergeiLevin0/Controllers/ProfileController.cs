@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SergeiLevin0.Infrastructure.Interfaces;
-using SergeiLevin0.ViewModels;
+using SergeiLevin0.Interfaces;
+using SergeiLevin0.Domain.ViewModels;
 
 namespace SergeiLevin0.Controllers
 {

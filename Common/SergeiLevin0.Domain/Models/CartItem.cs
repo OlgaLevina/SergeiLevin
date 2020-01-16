@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.Models
+namespace SergeiLevin0.Domain.Models
 {
     public class CartItem
     {

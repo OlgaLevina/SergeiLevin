@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.ViewModels
+namespace SergeiLevin0.Domain.ViewModels
 {/// <summary>
  /// модель-представление заказа        [Required(ErrorMessage = "Имя является обязательным")]
 

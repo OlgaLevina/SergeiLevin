@@ -1,6 +1,6 @@
 ﻿using SergeiLevin0.Data;
 using SergeiLevin0.Domain.Entities;
-using SergeiLevin0.Infrastructure.Interfaces;
+using SergeiLevin0.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

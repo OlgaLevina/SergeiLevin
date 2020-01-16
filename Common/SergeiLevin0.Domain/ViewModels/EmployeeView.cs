@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.ViewModels
+namespace SergeiLevin0.Domain.ViewModels
 {
     /// <summary>
     /// модель сотрудника
@@ -13,7 +13,7 @@ namespace SergeiLevin0.ViewModels
     public class EmployeeView
     {
         //во многих атрибутах можно использовать рестурсы, для многоязычных версий
-        [HiddenInput(DisplayValue = false)]
+        //[HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
         [Display(Name = "Имя")]// [Display(Name ="Имя", ResourceType =)] - для многоязычной версии. Атрибут позволяет указать - как мы хотим визуализировать данные модели
         [Required] //атрибут обязательности. В случае его отсутствия в Post запросе ModelState.IsValid будет false (см. контроллер  Edit)

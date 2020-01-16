@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SergeiLevin0.ViewModels
+namespace SergeiLevin0.Domain.ViewModels
 {
     public class CatalogViewModel
     {

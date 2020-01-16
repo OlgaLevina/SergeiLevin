@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.Infrastructure.Interfaces
+namespace SergeiLevin0.Interfaces
 {
     public interface IProductData
     {

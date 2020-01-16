@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SergeiLevin0.Domain.Entities.Identity;
-using SergeiLevin0.ViewModels.Idntity;
+using SergeiLevin0.Domain.ViewModels.Idntity;
 
 namespace SergeiLevin0.Controllers
 {

@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SergeiLevin0.ViewModels.Idntity
+namespace SergeiLevin0.Domain.ViewModels.Idntity
 {
     public class RegisterUserViewModel
     {
         [Required]
         [MaxLength(256)]
         [Display(Name ="Имя Пользователя")]
-        [Remote(nameof(Controllers.AccountController.IsNameFree), "Account")]//проверка новизны имени!
+        //[Remote(nameof(Controllers.AccountController.IsNameFree), "Account")]//проверка новизны имени!
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]//указываем, что это пароль и его нужно скрыть звездочками
