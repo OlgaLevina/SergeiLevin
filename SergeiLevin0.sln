@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLevin0.Interfaces", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLevin0.Services", "Services\SergeiLevin0.Services\SergeiLevin0.Services.csproj", "{90BE5C02-09F4-4F6A-AD81-545045484FD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLevin0.Clients", "Services\SergeiLevin0.Clients\SergeiLevin0.Clients.csproj", "{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{90BE5C02-09F4-4F6A-AD81-545045484FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90BE5C02-09F4-4F6A-AD81-545045484FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90BE5C02-09F4-4F6A-AD81-545045484FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{D50C2A83-20C1-4691-ADEA-1138B52112D6} = {3B4284BB-4D44-4E9B-9582-5551B0D5EE01}
 		{1ED89950-CF67-493E-84AB-C5B2D6E59AA6} = {3B4284BB-4D44-4E9B-9582-5551B0D5EE01}
 		{90BE5C02-09F4-4F6A-AD81-545045484FD1} = {3B4284BB-4D44-4E9B-9582-5551B0D5EE01}
+		{ECEAAB63-4FD0-40F5-89F8-BDF875CAD33D} = {3B4284BB-4D44-4E9B-9582-5551B0D5EE01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8895D0C5-48DA-482D-BAD0-8EA8BC34F58B}
