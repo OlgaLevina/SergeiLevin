@@ -12,21 +12,7 @@
             </div>
 
             <div class="col-sm-9 padding-right">
-                <div class="features_items">
-                    <!--features_items-->
-                    <h2 class="title text-center">Features Items</h2>
-                    @foreach (var product in Model.Products)
-                    {
-                        //@await Html.PartialAsync("Partial/_FeaturesItem", product);
-                        <partial name="Partial/_FeaturesItem" model="@product" />
-                    }
-                </div><!--features_items-->
-                <ul class="pagination">
-                    <li class="active"><a href="">1</a></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">&raquo;</a></li>
-                </ul>
+                <partial name="Partial/_FeaturesItem" model="@Model.Products" />
             </div>
         </div>
     </div>

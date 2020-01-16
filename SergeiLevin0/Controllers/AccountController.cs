@@ -68,7 +68,7 @@ namespace SergeiLevin0.Controllers
             var login_result = await SignInManager.PasswordSignInAsync(
                 Model.UserName, 
                 Model.Password,
-                Model.RememberMe,
+                Model.RememberMe,//https://stackoverflow.com/questions/2452656/asp-net-mvc-rememberme
                 false);//блокировка в случае максимального кол-ва ошибок - пока отключена, потом исправить на true!!!!
             if (login_result.Succeeded)
             {

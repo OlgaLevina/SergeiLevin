@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Список товаров";
+}
+
+<p><a asp-action="Edit" class="btn btn-success"> Добавить</a></p>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(product => product.Name)</th>
+            <th>@Html.DisplayNameFor(product => product.Brand)</th>
+            <th>@Html.DisplayNameFor(product => product.Category)</th>
+            <th>@Html.DisplayNameFor(product => product.ImageUrl)</th>
+            <th>@Html.DisplayNameFor(product => product.Price)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+        <tr>
+            <td><a asp-action="Edit" asp-route-id="@product.Id"><i class="glyphicon glyphicon-edit"></i> </a></td>
+            <td>@Html.DisplayFor(m => product.Name)</td>
+            <th>@Html.DisplayFor(m => product.Brand.Name)</th>
+            <th>@Html.DisplayFor(m => product.Category.Name)</th>
+            <th><img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name" /></th>
+            <th>@Html.DisplayFor(m => product.Price)</th>
+            <td><a asp-action="Delete" asp-route-id="@product.Id"><i class="glyphicon glyphicon-remove"></i> </a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
