@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\SergeiLevin0.Clients\SergeiLevin0.Clients.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.DAL\SergeiLevin0.DAL.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.Interfaces\SergeiLevin0.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.ServiceHosting\SergeiLevin0.ServiceHosting.csproj" />

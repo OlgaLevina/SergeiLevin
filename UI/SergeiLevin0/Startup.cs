@@ -15,6 +15,8 @@ using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
+using SergeiLevin0.Interfaces.Api;
+using SergeiLevin0.Clients.Values;
 
 namespace SergeiLevin0
 {
@@ -44,6 +46,7 @@ namespace SergeiLevin0
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, CookieCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddTransient<IValuesService, ValuesClient>();
             //сервис идентификации; можно вместо своего класса использовать базовый, например. - IdentityRole
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<SergeiLevinContext>()//поставщики данных регистрируем через систему ЭнтитиФрэймВорк - добавляем место хранения данных (
