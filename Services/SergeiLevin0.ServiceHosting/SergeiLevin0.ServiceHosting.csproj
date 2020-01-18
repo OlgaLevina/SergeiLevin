@@ -8,6 +8,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
+    <ProjectReference Include="..\SergeiLevin0.DAL\SergeiLevin0.DAL.csproj" />
+    <ProjectReference Include="..\SergeiLevin0.Interfaces\SergeiLevin0.Interfaces.csproj" />
+    <ProjectReference Include="..\SergeiLevin0.Services\SergeiLevin0.Services.csproj" />
   </ItemGroup>
 
 </Project>
