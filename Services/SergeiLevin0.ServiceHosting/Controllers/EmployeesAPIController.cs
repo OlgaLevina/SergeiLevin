@@ -21,7 +21,7 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         [HttpDelete("{id}"), ActionName("Delete")]
         public bool Delete(int id) => empoyeesData.Delete(id);
         [HttpPut("{id}"), ActionName("Put")]
-        public void Edit(int id, EmployeeView employee) => empoyeesData.Edit(id, employee);
+        public EmployeeView Edit(int id, EmployeeView employee) => empoyeesData.Edit(id, employee);
         [HttpGet, ActionName("Get")]//второй атрибут можно и не добавлять: если добавить то путь будет api/employees/Get, а без этого - просто путь к котроллеру
         public IEnumerable<EmployeeView> GetAll() => empoyeesData.GetAll();
         [HttpGet("{id}"), ActionName("Get")]//атрибут с параметром, важно, чтобы имя точно повторяло парметр метода!

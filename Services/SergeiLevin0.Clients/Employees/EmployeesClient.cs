@@ -4,6 +4,7 @@ using SergeiLevin0.Domain.ViewModels;
 using SergeiLevin0.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace SergeiLevin0.Clients.Employees
@@ -14,34 +15,20 @@ namespace SergeiLevin0.Clients.Employees
 
         public EmployeesClient(IConfiguration configuration) : base(configuration, "api/employees") { }
 
-        public void Add(EmployeeView employee)
+        public void Add(EmployeeView employee) => Post(ServiceAddress, employee);
+
+        public bool Delete(int id) => base.Delete($"{ServiceAddress}/{id}").IsSuccessStatusCode;
+
+        public EmployeeView Edit(int id, EmployeeView employee)
         {
-            throw new NotImplementedException();
+            var response = Put($"{ServiceAddress}/{id}", employee);
+            return response.Content.ReadAsAsync<EmployeeView>().Result;
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<EmployeeView> GetAll() => Get<List<EmployeeView>>(ServiceAddress);
 
-        public void Edit(int id, EmployeeView employee)
-        {
-            throw new NotImplementedException();
-        }
+        public EmployeeView GetById(int id) => Get<EmployeeView>($"{ServiceAddress}/{id}");
 
-        public IEnumerable<EmployeeView> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public EmployeeView GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
+        public void SaveChanges(){}
     }
 }

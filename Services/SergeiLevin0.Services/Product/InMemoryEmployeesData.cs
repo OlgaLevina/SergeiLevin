@@ -31,17 +31,18 @@ namespace SergeiLevin0.Services
             return EmployeesList.Remove(employeeOld);
         }
 
-        public void Edit(int id, EmployeeView employee) 
+        public EmployeeView Edit(int id, EmployeeView employee) 
         {
             if(employee is null) throw new ArgumentNullException(nameof(employee));
             EmployeeView employeeOld = GetById(id);
-            if (employeeOld is null) return;
+            if (employeeOld is null) return null;
             employeeOld.FirstName = employee.FirstName;
             employeeOld.Age = employee.Age;
             employeeOld.Patronymic = employee.Patronymic;
             employeeOld.Position = employee.Position;
             employeeOld.Role = employee.Role;
             employeeOld.SecondName = employee.SecondName;
+            return employeeOld;
         }
 
         public IEnumerable<EmployeeView> GetAll() => EmployeesList;

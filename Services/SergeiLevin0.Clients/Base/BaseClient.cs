@@ -50,7 +50,7 @@ namespace SergeiLevin0.Clients.Base
         protected HttpResponseMessage Put<T>(string url, T item) => PutAsync(url, item).Result;
         
         protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel = default) => await Client.DeleteAsync(url, Cancel);
-        protected HttpResponseMessage Delete<T>(string url) => DeleteAsync(url).Result;
+        protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
 
                      
         #region IDisposable
