@@ -19,6 +19,7 @@ using SergeiLevin0.Interfaces.Api;
 using SergeiLevin0.Clients.Values;
 using SergeiLevin0.Clients.Employees;
 using SergeiLevin0.Clients.Products;
+using SergeiLevin0.Clients.Orders;
 
 namespace SergeiLevin0
 {
@@ -49,7 +50,8 @@ namespace SergeiLevin0
             //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartService, CookieCartService>();
-            services.AddScoped<IOrderService, SqlOrderService>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
             services.AddTransient<IValuesService, ValuesClient>();
             //сервис идентификации; можно вместо своего класса использовать базовый, например. - IdentityRole
             services.AddIdentity<User, Role>()
