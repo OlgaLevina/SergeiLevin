@@ -18,6 +18,7 @@ using SergeiLevin0.Infrastructure.Services;
 using SergeiLevin0.Interfaces.Api;
 using SergeiLevin0.Clients.Values;
 using SergeiLevin0.Clients.Employees;
+using SergeiLevin0.Clients.Products;
 
 namespace SergeiLevin0
 {
@@ -45,7 +46,8 @@ namespace SergeiLevin0
             //2. интегрированные методы расширения, включает в себя уже все, что нужно.  
             //services.AddSession(); // сервис к app.UseSession()
             // services.AddScoped<IProductData,InMemoryProductData>();
-            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartService, CookieCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddTransient<IValuesService, ValuesClient>();

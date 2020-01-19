@@ -1,4 +1,5 @@
-﻿using SergeiLevin0.Domain.Entities;
+﻿using SergeiLevin0.Domain.DTO.Products;
+using SergeiLevin0.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SergeiLevin0.Interfaces
     {
         IEnumerable<Category> GetCategories();
         IEnumerable<Brand> GetBrands();
-        IEnumerable<Product> GetProducts(ProductFilter filter=null);
-        Product GetProductById(int id);
+        IEnumerable<ProductDTO> GetProducts(ProductFilter filter=null);
+        ProductDTO GetProductById(int id);
     }
 }
