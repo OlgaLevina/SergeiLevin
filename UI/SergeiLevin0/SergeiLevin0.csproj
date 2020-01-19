@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\admin\css\" />
+    <Folder Include="wwwroot\admin\fonts\" />
+    <Folder Include="wwwroot\admin\images\" />
+    <Folder Include="wwwroot\admin\js\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\fonts\glyphicons-halflings-regular.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\SergeiLevin0.DAL\SergeiLevin0.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\SergeiLevin0.Interfaces\SergeiLevin0.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\SergeiLevin0.ServiceHosting\SergeiLevin0.ServiceHosting.csproj" />
+    <ProjectReference Include="..\..\Services\SergeiLevin0.Services\SergeiLevin0.Services.csproj" />
+  </ItemGroup>
+
+</Project>

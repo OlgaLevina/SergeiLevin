@@ -1,0 +1,29 @@
+﻿@model SergeiLevin0.Domain.ViewModels.EmployeeView
+@{ViewBag.Title = "EmployeeDatails";
+    ViewData["Description"] = $"{Model.Id} {Model.SecondName} {Model.FirstName}";}
+
+    <h3>@ViewBag.Title</h3>
+    <h4>@ViewData["Description"]</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.Id)</th>
+                <th>@Html.LabelFor(m => m.FirstName)</th>
+                <th>@Html.LabelFor(m => m.SecondName)</th>
+                <th>@Html.LabelFor(m => m.Age)</th>
+                <th>@Html.LabelFor(m => m.Position)</th>
+                <th>@Html.LabelFor(m => m.Role)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.FirstName</td>
+                <td>@Model.SecondName</td>
+                <td>@Model.Age</td>
+                <td>@Model.Position</td>
+                <td>@Model.Role</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><a asp-controller="Employees" asp-action="Index">Return to list of empoyees!</a></p>
