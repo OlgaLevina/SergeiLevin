@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SergeiLevin0.Interfaces.Services
 {
-    public interface UsersClient: //наследует от стандартных интерфэйсов. Можно было бы сделать под каждй из них свой наш интерфэйс и контроллер, но так компактнее
+    public interface IUsersClient: //наследует от стандартных интерфэйсов. Можно было бы сделать под каждй из них свой наш интерфэйс и контроллер, но так компактнее
         IUserRoleStore<User>, //хранилище ролей
         IUserPasswordStore<User>, //..паролей
         IUserEmailStore<User>,//..имэйлов
