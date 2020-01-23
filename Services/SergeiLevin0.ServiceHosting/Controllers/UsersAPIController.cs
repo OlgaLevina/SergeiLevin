@@ -23,7 +23,7 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         private readonly UserStore<User, Role, SergeiLevinContext> UserStore;
         public UsersAPIController(SergeiLevinContext db) => UserStore = new UserStore<User, Role,SergeiLevinContext>(db);
         #region Users
-        [HttpPost("AllUsers")]//используется только для отработки работы системы, в рабочем проекте не нужен
+        [HttpGet("AllUsers")]//используется только для отработки работы системы, в рабочем проекте не нужен
         public async Task<IEnumerable<User>> GetAllUsersAsync() => await UserStore.Users.ToArrayAsync();
 
         [HttpPost("userId")]

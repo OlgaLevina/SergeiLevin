@@ -18,8 +18,8 @@ namespace SergeiLevin0.ServiceHosting.Controllers
     [ApiController]
     public class RolesAPIController : ControllerBase
     {
-        private readonly RoleStore<Role> RoleStore;
-        public RolesAPIController(SergeiLevinContext db) => RoleStore = new RoleStore<Role>(db);
+        private readonly RoleStore<Role, SergeiLevinContext> RoleStore;
+        public RolesAPIController(SergeiLevinContext db) => RoleStore = new RoleStore<Role,SergeiLevinContext>(db);
 
         [HttpGet("AllRoles")]//технический метод для проработки
         public async Task<IEnumerable<Role>> GetAllRolesAsync() => await RoleStore.Roles.ToArrayAsync();
