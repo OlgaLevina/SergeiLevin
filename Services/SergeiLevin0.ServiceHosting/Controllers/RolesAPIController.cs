@@ -18,40 +18,40 @@ namespace SergeiLevin0.ServiceHosting.Controllers
     [ApiController]
     public class RolesAPIController : ControllerBase
     {
-        private readonly RoleStore<IdentityRole> RoleStore;
-        public RolesAPIController(SergeiLevinContext db) => RoleStore = new RoleStore<IdentityRole>(db);
+        private readonly RoleStore<Role> RoleStore;
+        public RolesAPIController(SergeiLevinContext db) => RoleStore = new RoleStore<Role>(db);
 
         [HttpGet("AllRoles")]//технический метод для проработки
-        public async Task<IEnumerable<Role>> GetAllRoles() => await RoleStore.Roles.ToArrayAsync();
+        public async Task<IEnumerable<Role>> GetAllRolesAsync() => await RoleStore.Roles.ToArrayAsync();
 
         [HttpPost]
-        public async Task<bool> CreateAsync(IdentityRole role) => (await RoleStore.CreateAsync(role)).Succeeded;
+        public async Task<bool> CreateAsync(Role role) => (await RoleStore.CreateAsync(role)).Succeeded;
 
         [HttpPut]
-        public async Task<bool> UpdateAsync(IdentityRole role) => (await RoleStore.UpdateAsync(role)).Succeeded;
+        public async Task<bool> UpdateAsync(Role role) => (await RoleStore.UpdateAsync(role)).Succeeded;
 
         [HttpPost("delete")]
-        public async Task<bool> DeleteAsync(IdentityRole role) => (await RoleStore.DeleteAsync(role)).Succeeded;
+        public async Task<bool> DeleteAsync(Role role) => (await RoleStore.DeleteAsync(role)).Succeeded;
 
         [HttpPost("GetRoleId")]
-        public async Task<string> GetRoleIdAsync(IdentityRole role) => await RoleStore.GetRoleIdAsync(role);
+        public async Task<string> GetRoleIdAsync(Role role) => await RoleStore.GetRoleIdAsync(role);
 
         [HttpPost("GetRoleName")]
-        public async Task<string> GetRoleNameAsync(IdentityRole role) => await RoleStore.GetRoleNameAsync(role);
+        public async Task<string> GetRoleNameAsync(Role role) => await RoleStore.GetRoleNameAsync(role);
 
         [HttpPost("SetRoleName/{roleName}")]
-        public Task SetRoleNameAsync(IdentityRole role, string roleName) => RoleStore.SetRoleNameAsync(role, roleName);
+        public Task SetRoleNameAsync(Role role, string roleName) => RoleStore.SetRoleNameAsync(role, roleName);
 
         [HttpPost("GetNormalizedRoleName")]
-        public async Task<string> GetNormalizedRoleNameAsync(IdentityRole role) => await RoleStore.GetRoleNameAsync(role);
+        public async Task<string> GetNormalizedRoleNameAsync(Role role) => await RoleStore.GetRoleNameAsync(role);
 
         [HttpPost("SetNormalizedRoleName/{normalizedName}")]
-        public Task SetNormalizedRoleNameAsync(IdentityRole role, string normalizedName) => RoleStore.SetNormalizedRoleNameAsync(role, normalizedName);
+        public Task SetNormalizedRoleNameAsync(Role role, string normalizedName) => RoleStore.SetNormalizedRoleNameAsync(role, normalizedName);
 
         [HttpGet("FindById/{roleId}")]
-        public async Task<IdentityRole> FindByIdAsync(string roleId) => await RoleStore.FindByIdAsync(roleId);
+        public async Task<Role> FindByIdAsync(string roleId) => await RoleStore.FindByIdAsync(roleId);
 
         [HttpGet("FindByName/{normalizedRoleName}")]
-        public async Task<IdentityRole> FindByNameAsync(string normalizedRoleName) => await RoleStore.FindByNameAsync(normalizedRoleName);
+        public async Task<Role> FindByNameAsync(string normalizedRoleName) => await RoleStore.FindByNameAsync(normalizedRoleName);
     }
 }
