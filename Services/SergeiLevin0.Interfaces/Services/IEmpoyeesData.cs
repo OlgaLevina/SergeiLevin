@@ -42,7 +42,7 @@ namespace SergeiLevin0.Interfaces
         /// </summary>
         /// <param name="id">id изменяемого сотрудника</param>
         /// <param name="employee">новые значения</param>
-        void Edit(int id, EmployeeView employee);
+        EmployeeView Edit(int id, EmployeeView employee);
         /// <summary>
         /// сохранение изменений
         /// </summary>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<ProductDTO>
 @{
     ViewData["Title"] = "Список товаров";
 }
@@ -10,7 +10,7 @@
             <th></th>
             <th>@Html.DisplayNameFor(product => product.Name)</th>
             <th>@Html.DisplayNameFor(product => product.Brand)</th>
-            <th>@Html.DisplayNameFor(product => product.Category)</th>
+            @*<th>@Html.DisplayNameFor(product => product.Category)</th>*@
             <th>@Html.DisplayNameFor(product => product.ImageUrl)</th>
             <th>@Html.DisplayNameFor(product => product.Price)</th>
             <th></th>
@@ -23,7 +23,7 @@
             <td><a asp-action="Edit" asp-route-id="@product.Id"><i class="glyphicon glyphicon-edit"></i> </a></td>
             <td>@Html.DisplayFor(m => product.Name)</td>
             <th>@Html.DisplayFor(m => product.Brand.Name)</th>
-            <th>@Html.DisplayFor(m => product.Category.Name)</th>
+            @*<th>@Html.DisplayFor(m => product.Category.Name)</th>*@
             <th><img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name" /></th>
             <th>@Html.DisplayFor(m => product.Price)</th>
             <td><a asp-action="Delete" asp-route-id="@product.Id"><i class="glyphicon glyphicon-remove"></i> </a></td>

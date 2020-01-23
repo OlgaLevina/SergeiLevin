@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SergeiLevin0.Domain.DTO.Orders;
 
 namespace SergeiLevin0.Infrastructure.Services
 {
@@ -19,47 +20,85 @@ namespace SergeiLevin0.Infrastructure.Services
 
         public SqlOrderService(SergeiLevinContext db, UserManager<User> userManager) { Db = db; UserManager = userManager; }
 
-        public Order CreateOrder(OrderViewModel orderModel, CartViewModel cartModel, string userName)
+        public OrderDTO CreateOrder(CreateOrderModel orderModel, string userName)
         {
             var user=UserManager.FindByNameAsync(userName).Result;
             using (var transaction = Db.Database.BeginTransaction())
             {
                 var order = new Order
                 {
-                    Name = orderModel.Name,
-                    Address = orderModel.Address,
-                    Phone = orderModel.Phone,
+                    Name = orderModel.OrderViewModel.Name,
+                    Address = orderModel.OrderViewModel.Address,
+                    Phone = orderModel.OrderViewModel.Phone,
                     User = user,
                     Date = DateTime.Now
                 };
                 Db.Orders.Add(order);
-                foreach (var(product_model, quantity) in cartModel.Items)//(product, quantity) -декомпозиция - есть дот.нет коре, но отсутствует в стандарте, поэтому нужно сделать ее самостоятельно
+                foreach (var item in orderModel.OrderItems)//(product, quantity) -декомпозиция - есть дот.нет коре, но отсутствует в стандарте, поэтому нужно сделать ее самостоятельно
                 {
-                    var product = Db.Products.FirstOrDefault(p => p.Id == product_model.Id);
+                    var product = Db.Products.FirstOrDefault(p => p.Id == item.Id);
                     if (product is null)
-                        throw new InvalidOperationException($"Товар с идентификатором {product_model.Id} отсутствует!");
+                        throw new InvalidOperationException($"Товар с идентификатором {item.Id} отсутствует!");
                     var order_item = new OrderItem
                     {
                         Order = order,
                         Price = product.Price,
-                        Quantity = quantity,
+                        Quantity = item.Quantity,
                         Product = product
                     };
                     Db.OrderItems.Add(order_item);
                 }
                 Db.SaveChanges();
                 transaction.Commit();
-                return order;
+                return new OrderDTO
+                {
+                    Address = order.Address,
+                    Date = order.Date,
+                    Phone = order.Phone,
+                    OrderItems = order.OrderItems.Select(item => new OrderItemDTO
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        Quantity = item.Quantity
+                    })
+                };
             }
         }
 
-        public Order GetOrderById(int id) => Db.Orders
-            .Include(order => order.OrderItems)
-            .FirstOrDefault(order => order.Id == id);
+        public OrderDTO GetOrderById(int id)
+        {
+            var o=Db.Orders
+              .Include(order => order.OrderItems)
+              .FirstOrDefault(order => order.Id == id);
+            return o is null ? null : new OrderDTO
+            {
+                Phone = o.Phone,
+                Address = o.Address,
+                Date = o.Date,
+                OrderItems = o.OrderItems.Select(item => new OrderItemDTO
+                {
+                    Id = item.Id,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                })
 
-        public IEnumerable<Order> GetUserOrders(string userName) => Db.Orders
+            };
+        }
+
+        public IEnumerable<OrderDTO> GetUserOrders(string userName) => Db.Orders
             .Include(order => order.User)
             .Include(order => order.OrderItems)
-            .Where(order => order.User.UserName == userName);
+            .Where(order => order.User.UserName == userName).Select(o => new OrderDTO
+            {
+                Address=o.Address,
+                Date=o.Date,
+                Phone=o.Phone,
+                OrderItems=o.OrderItems.Select(item => new OrderItemDTO
+                {
+                    Id=item.Id,
+                    Price=item.Price,
+                    Quantity=item.Quantity
+                })
+            });
     }
 }

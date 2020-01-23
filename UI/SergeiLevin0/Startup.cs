@@ -15,6 +15,11 @@ using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Convenctions;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Infrastructure.Services;
+using SergeiLevin0.Interfaces.Api;
+using SergeiLevin0.Clients.Values;
+using SergeiLevin0.Clients.Employees;
+using SergeiLevin0.Clients.Products;
+using SergeiLevin0.Clients.Orders;
 
 namespace SergeiLevin0
 {
@@ -34,16 +39,20 @@ namespace SergeiLevin0
             services.AddTransient<SergeiLevinContextInitializer>();
             // методы добавления сервисов:
             //1. самостоятельное добавление сервисов:
-            services.AddSingleton<IEmpoyeesData, InMemoryEmployeesData>(); //в режиме singleton  - создается только 1 экземляр класса (единого объекта на все время жизни приложения с момента 1го обращения к нему), который будет раздается всем желающим в дальнейшем; можно регитриовтаь просто класс без интерфейса!
+            //services.AddSingleton<IEmpoyeesData, InMemoryEmployeesData>(); //в режиме singleton  - создается только 1 экземляр класса (единого объекта на все время жизни приложения с момента 1го обращения к нему), который будет раздается всем желающим в дальнейшем; можно регитриовтаь просто класс без интерфейса!
+            services.AddSingleton<IEmpoyeesData, EmployeesClient>();//вместо InMemoryEmployeesData
             //services.AddTransient<>(); //один отдельный объект сосздается при каждом запросе.
             //services.AddScoped<>();//один отельный объект на время обработки одного входящего запроса (жизни области), что-то типа using
             //в параметрах могут быть не только классы, но и типы!!!
-        //2. интегрированные методы расширения, включает в себя уже все, что нужно.  
+            //2. интегрированные методы расширения, включает в себя уже все, что нужно.  
             //services.AddSession(); // сервис к app.UseSession()
-           // services.AddScoped<IProductData,InMemoryProductData>();
-            services.AddScoped<IProductData, SqlProductData>();
+            // services.AddScoped<IProductData,InMemoryProductData>();
+            //services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartService, CookieCartService>();
-            services.AddScoped<IOrderService, SqlOrderService>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
+            services.AddTransient<IValuesService, ValuesClient>();
             //сервис идентификации; можно вместо своего класса использовать базовый, например. - IdentityRole
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<SergeiLevinContext>()//поставщики данных регистрируем через систему ЭнтитиФрэймВорк - добавляем место хранения данных (

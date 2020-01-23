@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Domain.ViewModels;
+using SergeiLevin0.Domain.DTO.Orders;
 
 namespace SergeiLevin0.Controllers
 {
@@ -47,7 +48,18 @@ namespace SergeiLevin0.Controllers
                     CartViewModel=CartService.TransformFromCart(),
                     OrderViewModel=Model
                 });
-            var order = OrderService.CreateOrder(Model, CartService.TransformFromCart(), User.Identity.Name);
+            var create_order_model = new CreateOrderModel
+            {
+                OrderViewModel = Model,
+                OrderItems = CartService.TransformFromCart().Items
+                .Select(item => new OrderItemDTO
+                {
+                    Id = item.Key.Id,
+                    Price = item.Key.Price,
+                    Quantity = item.Value
+                }).ToList()
+            };
+            var order = OrderService.CreateOrder(create_order_model, User.Identity.Name);
             CartService.RemoveAll();
             return RedirectToAction("OrderConfirmed", new {id=order.Id });
         }
