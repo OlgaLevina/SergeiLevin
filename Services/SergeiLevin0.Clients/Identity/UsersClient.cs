@@ -57,13 +57,12 @@ namespace SergeiLevin0.Clients.Identity
             await PostAsync($"{ServiceAddress}/role/{roleName}", user, cancel);
         public async Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancel) => 
             await PostAsync($"{ServiceAddress}/role/delete/{roleName}", user, cancel);
-        //????????????????????????????????????
         public async Task<IList<string>> GetRolesAsync(User user, CancellationToken cancel) =>
             await (await PostAsync($"{ServiceAddress}/roles", user, cancel))
-            .Content.ReadAsAsync<IList<string>>(cancel);//.ConfigureAwait(false);-почему здесь нет, а в других есть? Какого вообще назначение этого метода, когда он нужен?
+            .Content.ReadAsAsync<IList<string>>(cancel);//.ConfigureAwait(false);-здесь и далее потом добавить!!!
         public async Task<bool> IsInRoleAsync(User user, string roleName, CancellationToken cancel) => 
             await (await PostAsync($"{ServiceAddress}/inrole/{roleName}", user, cancel))
-            .Content.ReadAsAsync<bool>(cancel);//.ConfigureAwait(false);-???
+            .Content.ReadAsAsync<bool>(cancel);//.ConfigureAwait(false);-!!!!
         public async Task<IList<User>> GetUsersInRoleAsync(string roleName, CancellationToken cancel) => 
             await GetAsync<List<User>>($"{ServiceAddress}/usersInRole/{roleName}", cancel);
         #endregion
@@ -72,8 +71,7 @@ namespace SergeiLevin0.Clients.Identity
         {
             user.PasswordHash = passwordHash;
             await PostAsync($"{ServiceAddress}/setPasswordHash", 
-                new PasswordHashDTO() { User = user,   Hash = passwordHash},
-                cancel);
+                new PasswordHashDTO() { User = user,   Hash = passwordHash}, cancel);
         }
         public async Task<string> GetPasswordHashAsync(User user, CancellationToken cancel) => 
             await (await PostAsync($"{ServiceAddress}/getPasswordHash", user, cancel))
