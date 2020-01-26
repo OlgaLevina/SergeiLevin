@@ -17,6 +17,7 @@ using SergeiLevin0.Domain.Entities.Identity;
 using SergeiLevin0.Infrastructure.Services;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Services;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SergeiLevin0.ServiceHosting
 {
@@ -25,7 +26,10 @@ namespace SergeiLevin0.ServiceHosting
         public Startup(IConfiguration configuration)=> Configuration = configuration;
 
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// конфигурация приложения
+        /// </summary>
+        /// <param name="services">интерфейс сервисов</param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -57,6 +61,12 @@ namespace SergeiLevin0.ServiceHosting
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICartService, CookieCartService>();
+            services.AddSwaggerGen(opt=> //система вэб документации, которая автоматически формирует джэйсон-документацию по нашему вэбайпи, а также формирует вэб-интерфэйс, который показывает эту документацию и позволяет тестировать методы вэб-запросы (не только get, но и остальные)
+            {
+                opt.SwaggerDoc("v1", new Info { Title = "SergeiLevin.API", Version = "v1" });//конфигурация 1й версии документации
+                opt.IncludeXmlComments("SergeiLevin0.ServiceHosting.xml");//подключение информации из xml-файла
+            }
+            );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
@@ -70,6 +80,11 @@ namespace SergeiLevin0.ServiceHosting
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(opt => {
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "SergeiLevin.API");//метсо размещения файла документации
+                opt.RoutePrefix = string.Empty;//прификс доступа к вэб-интерфэйсу - в нашем случае пусто
+            });
 
             app.UseMvc();
         }
