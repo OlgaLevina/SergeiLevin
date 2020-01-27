@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
@@ -33,11 +34,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\SergeiLevin0.Domain\SergeiLevin0.Domain.csproj" />
+    <ProjectReference Include="..\..\SergeiLevin.Logger\SergeiLevin.Logger.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.Clients\SergeiLevin0.Clients.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.DAL\SergeiLevin0.DAL.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.Interfaces\SergeiLevin0.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.ServiceHosting\SergeiLevin0.ServiceHosting.csproj" />
     <ProjectReference Include="..\..\Services\SergeiLevin0.Services\SergeiLevin0.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

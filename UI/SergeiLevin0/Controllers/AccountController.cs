@@ -41,19 +41,23 @@ namespace SergeiLevin0.Controllers
             {
                 UserName = Model.UserName
             };
-            Loger.LogInformation($"Регистрация нового пользователя {Model.UserName}");
-            var registration_result = await UserManager.CreateAsync(user, Model.Password);
-            if (registration_result.Succeeded)
+            //Loger.LogInformation($"Регистрация нового пользователя {Model.UserName}");
+
+            using (Loger.BeginScope($"Регистрация нового пользователя {Model.UserName}")) //вместо записи журанала формируем целую область, Все записи внутри области будут озаглавлены ее названием
             {
-                await UserManager.AddToRoleAsync(user, Role.User);//наделение нового пользователя правами пользователя
-                Loger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
-                await SignInManager.SignInAsync(user, false);
-                Loger.LogInformation($"Пользователь {Model.UserName} вошел в систему");
-                return RedirectToAction("Index", "Home");
+                var registration_result = await UserManager.CreateAsync(user, Model.Password);
+                if (registration_result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user, Role.User);//наделение нового пользователя правами пользователя
+                    Loger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
+                    await SignInManager.SignInAsync(user, false);
+                    Loger.LogInformation($"Пользователь {Model.UserName} вошел в систему");
+                    return RedirectToAction("Index", "Home");
+                }
+                foreach (var error in registration_result.Errors)
+                    ModelState.AddModelError("", error.Description);
+                Loger.LogWarning($"Ошибка при регистрации нового пользователя {Model.UserName}: {string.Join(' ', registration_result.Errors.Select(e => e.Description))} ");
             }
-            foreach (var error in registration_result.Errors)
-                ModelState.AddModelError("", error.Description);
-            Loger.LogWarning($"Ошибка при регистрации нового пользователя {Model.UserName}: {string.Join(' ', registration_result.Errors.Select(e => e.Description))} ");
             return View(Model);
         } 
 
