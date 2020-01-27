@@ -259,4 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/SergeiLevin0/wwwroot/lib
+/UI/SergeiLevin0/wwwroot/lib
+/Services/SergeiLevin0.ServiceHosting/Logs
+/UI/SergeiLevin0/Logs
