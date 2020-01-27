@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 
 namespace SergeiLevin0
 {
@@ -34,6 +37,17 @@ namespace SergeiLevin0
 
                 //}) 
                 //.UseUrls("http://0.0.0.0:8080")//http://localhost:8080/ - подключение к сайту через порт; подключение с телефона - https://remontka.pro/connect-android-windows-lan/; https://issue.life/questions/48262739
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseSerilog((host,log)=>
+                {
+                    log.ReadFrom.Configuration(host.Configuration)
+                    .MinimumLevel.Debug()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console(//параметры вывода можно и не расписывать
+                        outputTemplate:"[{Timstamp:HH:mm:ss.fff} {Level:u3}]{SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}")
+                    .WriteTo.RollingFile($".\\Logs\\SergeiLevin0[{DateTime.Now:yyyy-MM-ddTHH-mm-ss}].log")//файл для записи - сохранение в текстовом виде
+                    .WriteTo.File(new JsonFormatter(",", true), $".\\Logs\\SergeiLevin0[{DateTime.Now:yyyy-MM-ddTHH-mm-ss}].log.json");//сохранение в json или xml
+                });
     }
 }
