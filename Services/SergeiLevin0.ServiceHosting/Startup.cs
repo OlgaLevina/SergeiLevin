@@ -18,6 +18,8 @@ using SergeiLevin0.Infrastructure.Services;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using SergeiLevin.Logger;
+
 
 namespace SergeiLevin0.ServiceHosting
 {
@@ -73,8 +75,9 @@ namespace SergeiLevin0.ServiceHosting
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SergeiLevinContextInitializer db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SergeiLevinContextInitializer db, ILoggerFactory log)
         {
+            log.AddLog4Net();
             db.InitializeAsync().Wait();
             if (env.IsDevelopment())
             {
