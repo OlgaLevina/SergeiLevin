@@ -45,9 +45,10 @@ namespace SergeiLevin0
                     .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                     .Enrich.FromLogContext()
                     .WriteTo.Console(//параметры вывода можно и не расписывать
-                        outputTemplate:"[{Timstamp:HH:mm:ss.fff} {Level:u3}]{SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}")
+                        outputTemplate: "[{Timstamp:HH:mm:ss.fff} {Level:u3}]{SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}")
                     .WriteTo.RollingFile($".\\Logs\\SergeiLevin0[{DateTime.Now:yyyy-MM-ddTHH-mm-ss}].log")//файл для записи - сохранение в текстовом виде
-                    .WriteTo.File(new JsonFormatter(",", true), $".\\Logs\\SergeiLevin0[{DateTime.Now:yyyy-MM-ddTHH-mm-ss}].log.json");//сохранение в json или xml
+                    .WriteTo.File(new JsonFormatter(",", true), $".\\Logs\\SergeiLevin0[{DateTime.Now:yyyy-MM-ddTHH-mm-ss}].log.json")//сохранение в json или xml
+                    .WriteTo.Seq("http://localhost:50420");
                 });
     }
 }

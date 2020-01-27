@@ -1145,3 +1145,211 @@ INFO  18 2020-01-27 16:28:20,212 [18] ?     - Executed endpoint 'SergeiLevin0.Se
 
 INFO  18 2020-01-27 16:28:20,219 [18] ?     - Request finished in 102.0049ms 200 application/json; charset=utf-8
 
+INFO  1 2020-01-27 16:45:50,548 [1] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  7 2020-01-27 16:46:05,873 [7] ?     - Executed DbCommand (41ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  9 2020-01-27 16:46:05,896 [9] ?     - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  9 2020-01-27 16:46:05,911 [9] ?     - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+
+INFO  9 2020-01-27 16:46:05,927 [9] ?     - No migrations were applied. The database is already up to date.
+
+INFO  6 2020-01-27 16:46:06,180 [6] ?     - Executed DbCommand (37ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Descriprion], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  7 2020-01-27 16:46:06,281 [7] ?     - Executed DbCommand (12ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Descriprion], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  9 2020-01-27 16:46:06,326 [9] ?     - Executed DbCommand (12ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Descriprion], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0
+
+INFO  10 2020-01-27 16:46:06,492 [10] ?     - Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END
+
+INFO  7 2020-01-27 16:46:07,258 [7] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/values  
+
+INFO  10 2020-01-27 16:46:07,275 [10] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/products/categories  
+
+INFO  7 2020-01-27 16:46:07,444 [7] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting)'
+
+INFO  14 2020-01-27 16:46:07,448 [14] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:46:07,479 [7] ?     - Route matched with {action = "Get", controller = "Values"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] Get() on controller SergeiLevin0.ServiceHosting.Controllers.ValuesController (SergeiLevin0.ServiceHosting).
+
+INFO  14 2020-01-27 16:46:07,496 [14] ?     - Route matched with {action = "GetCategories", controller = "ProductsAPI"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[SergeiLevin0.Domain.Entities.Category] GetCategories() on controller SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController (SergeiLevin0.ServiceHosting).
+
+INFO  7 2020-01-27 16:46:07,542 [7] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  14 2020-01-27 16:46:07,554 [14] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  14 2020-01-27 16:46:07,561 [14] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 0.8198ms.
+
+INFO  7 2020-01-27 16:46:07,575 [7] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 13.8924ms.
+
+INFO  14 2020-01-27 16:46:07,594 [14] ?     - Executing ObjectResult, writing value of type 'Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1[[SergeiLevin0.Domain.Entities.Category, SergeiLevin0.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+
+INFO  7 2020-01-27 16:46:07,596 [7] ?     - Executing ObjectResult, writing value of type 'System.String[]'.
+
+INFO  7 2020-01-27 16:46:07,960 [7] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting) in 401.8524ms
+
+INFO  14 2020-01-27 16:46:08,045 [14] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  7 2020-01-27 16:46:08,115 [7] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:46:08,128 [7] ?     - Request finished in 863.1825ms 200 application/json; charset=utf-8
+
+INFO  14 2020-01-27 16:46:08,179 [14] ?     - Executed DbCommand (38ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], [c].[Order], [c].[ParentId]
+FROM [Categories] AS [c]
+
+INFO  14 2020-01-27 16:46:08,298 [14] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting) in 777.6447ms
+
+INFO  14 2020-01-27 16:46:08,312 [14] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting)'
+
+INFO  14 2020-01-27 16:46:08,322 [14] ?     - Request finished in 1065.5674ms 200 application/json; charset=utf-8
+
+INFO  7 2020-01-27 16:46:08,694 [7] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/products/brands  
+
+INFO  7 2020-01-27 16:46:08,703 [7] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:46:08,715 [7] ?     - Route matched with {action = "GetBrands", controller = "ProductsAPI"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[SergeiLevin0.Domain.Entities.Brand] GetBrands() on controller SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController (SergeiLevin0.ServiceHosting).
+
+INFO  7 2020-01-27 16:46:08,744 [7] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  7 2020-01-27 16:46:08,749 [7] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1.4674ms.
+
+INFO  7 2020-01-27 16:46:08,763 [7] ?     - Executing ObjectResult, writing value of type 'Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1[[SergeiLevin0.Domain.Entities.Brand, SergeiLevin0.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+
+INFO  7 2020-01-27 16:46:08,789 [7] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  7 2020-01-27 16:46:08,811 [7] ?     - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [b].[Id], [b].[Name], [b].[Order]
+FROM [Brands] AS [b]
+
+INFO  7 2020-01-27 16:46:08,828 [7] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting) in 109.7736ms
+
+INFO  7 2020-01-27 16:46:08,841 [7] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:46:08,848 [7] ?     - Request finished in 154.7295ms 200 application/json; charset=utf-8
+
+INFO  1 2020-01-27 16:47:49,869 [1] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  12 2020-01-27 16:47:54,238 [12] ?     - Executed DbCommand (479ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  6 2020-01-27 16:47:54,250 [6] ?     - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+
+INFO  6 2020-01-27 16:47:54,263 [6] ?     - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+
+INFO  6 2020-01-27 16:47:54,281 [6] ?     - No migrations were applied. The database is already up to date.
+
+INFO  12 2020-01-27 16:47:54,622 [12] ?     - Executed DbCommand (77ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Descriprion], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  7 2020-01-27 16:47:54,697 [7] ?     - Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Descriprion], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0
+
+INFO  7 2020-01-27 16:47:54,774 [7] ?     - Executed DbCommand (43ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Descriprion], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0
+
+INFO  7 2020-01-27 16:47:54,984 [7] ?     - Executed DbCommand (96ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END
+
+INFO  13 2020-01-27 16:47:55,777 [13] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/values  
+
+INFO  12 2020-01-27 16:47:55,788 [12] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/products/categories  
+
+INFO  7 2020-01-27 16:47:55,946 [7] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting)'
+
+INFO  13 2020-01-27 16:47:55,954 [13] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:47:55,979 [7] ?     - Route matched with {action = "GetCategories", controller = "ProductsAPI"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[SergeiLevin0.Domain.Entities.Category] GetCategories() on controller SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController (SergeiLevin0.ServiceHosting).
+
+INFO  13 2020-01-27 16:47:55,980 [13] ?     - Route matched with {action = "Get", controller = "Values"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] Get() on controller SergeiLevin0.ServiceHosting.Controllers.ValuesController (SergeiLevin0.ServiceHosting).
+
+INFO  7 2020-01-27 16:47:56,002 [7] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  13 2020-01-27 16:47:56,004 [13] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  7 2020-01-27 16:47:56,010 [7] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2.4336ms.
+
+INFO  13 2020-01-27 16:47:56,012 [13] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 6.0821ms.
+
+INFO  7 2020-01-27 16:47:56,039 [7] ?     - Executing ObjectResult, writing value of type 'Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1[[SergeiLevin0.Domain.Entities.Category, SergeiLevin0.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+
+INFO  13 2020-01-27 16:47:56,041 [13] ?     - Executing ObjectResult, writing value of type 'System.String[]'.
+
+INFO  7 2020-01-27 16:47:56,189 [7] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  13 2020-01-27 16:47:56,242 [13] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting) in 239.1966ms
+
+INFO  13 2020-01-27 16:47:56,386 [13] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ValuesController.Get (SergeiLevin0.ServiceHosting)'
+
+INFO  13 2020-01-27 16:47:56,555 [13] ?     - Request finished in 672.2448ms 200 application/json; charset=utf-8
+
+INFO  7 2020-01-27 16:47:56,660 [7] ?     - Executed DbCommand (40ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], [c].[Order], [c].[ParentId]
+FROM [Categories] AS [c]
+
+INFO  7 2020-01-27 16:47:56,806 [7] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting) in 799.8284ms
+
+INFO  7 2020-01-27 16:47:56,813 [7] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetCategories (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:47:56,834 [7] ?     - Request finished in 1096.2182ms 200 application/json; charset=utf-8
+
+INFO  7 2020-01-27 16:47:57,217 [7] ?     - Request starting HTTP/1.1 GET http://localhost:50420/api/products/brands  
+
+INFO  7 2020-01-27 16:47:57,224 [7] ?     - Executing endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:47:57,228 [7] ?     - Route matched with {action = "GetBrands", controller = "ProductsAPI"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[SergeiLevin0.Domain.Entities.Brand] GetBrands() on controller SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController (SergeiLevin0.ServiceHosting).
+
+INFO  7 2020-01-27 16:47:57,230 [7] ?     - Executing action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting) - Validation state: Valid
+
+INFO  7 2020-01-27 16:47:57,233 [7] ?     - Executed action method SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 0.6342ms.
+
+INFO  7 2020-01-27 16:47:57,236 [7] ?     - Executing ObjectResult, writing value of type 'Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1[[SergeiLevin0.Domain.Entities.Brand, SergeiLevin0.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+
+INFO  7 2020-01-27 16:47:57,243 [7] ?     - Entity Framework Core 2.2.6-servicing-10079 initialized 'SergeiLevinContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+
+INFO  7 2020-01-27 16:47:57,269 [7] ?     - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [b].[Id], [b].[Name], [b].[Order]
+FROM [Brands] AS [b]
+
+INFO  7 2020-01-27 16:47:57,283 [7] ?     - Executed action SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting) in 51.3073ms
+
+INFO  7 2020-01-27 16:47:57,286 [7] ?     - Executed endpoint 'SergeiLevin0.ServiceHosting.Controllers.ProductsAPIController.GetBrands (SergeiLevin0.ServiceHosting)'
+
+INFO  7 2020-01-27 16:47:57,290 [7] ?     - Request finished in 71.2912ms 200 application/json; charset=utf-8
+
