@@ -73,5 +73,6 @@ namespace SergeiLevin0.Controllers
         //    return Content(_Configuration["CustomData"]);
         //}
 
+        public IActionResult ThrowException() => throw new ApplicationException("Тестовая ошибка");
     }
 }

@@ -93,6 +93,6 @@ namespace SergeiLevin0.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult AccessDenieded() => View();
+        public IActionResult AccessDenied() => View();
     }
 }

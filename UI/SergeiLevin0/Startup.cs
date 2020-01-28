@@ -23,6 +23,7 @@ using SergeiLevin0.Clients.Orders;
 using SergeiLevin0.Clients.Identity;
 using Microsoft.Extensions.Logging;
 using SergeiLevin.Logger;
+using SergeiLevin0.Infrastructure.Middleware;
 
 namespace SergeiLevin0
 {
@@ -80,7 +81,7 @@ namespace SergeiLevin0
 
                 opt.LoginPath = "/Account/Login";//контроллер сдействием Логин, куда будет перенаправлен пользователь для входа в разделы, требующие авторизации 
                 opt.LogoutPath = "/Account/LogOut";//контролллер и действие для выхода пользователя из системы
-                opt.AccessDeniedPath = "/Account/AccessDenieded";//перенапрвление к контроллекру для отказа в доступе
+                opt.AccessDeniedPath = "/Account/AccessDenied";//перенапрвление к контроллекру для отказа в доступе
 
                 opt.SlidingExpiration = true;//автоматическая регистрация смены пользователем состояния из незарегистрированного в  регистрированное (изменнеие идентификатора сеанса)
 
@@ -107,6 +108,8 @@ namespace SergeiLevin0
             app.UseCookiePolicy();//ППО для подстверждения политики куков, особенно в европе
 
             app.UseAuthentication();//включаем идентификацию в конвеер - все, что выше - будет выполняться без нее, все что ниже - уже под ее контрлем!
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();//добавляем промежуточное ПО в конвеер
             //app.UseResponseCaching();//кэширование ответа
             //app.UseResponseCompression();//ППО, которое работает после того, как отработал контроллер, берет сформированные данные и пытается их сжать, чтобы уменьшить объем данных на строне клиента
 
