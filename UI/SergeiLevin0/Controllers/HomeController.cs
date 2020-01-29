@@ -30,14 +30,24 @@ namespace SergeiLevin0.Controllers
             return View();//вызовет предоставление из папки Home с название Index. Если хотим вызвать иное представление: return View("OtherView"); - которое тоже будет искаться в папке Хоум
         }
         public IActionResult ContactUs() { return View(); }
-        public IActionResult Login() { return View(); }
-        public IActionResult ProductDetails() { return View(); }
-        public IActionResult Shop() { return View(); }
-        public IActionResult _404() { return View(); }
+        //public IActionResult Login() { return View(); }//разобраться с вьюшекой - она осаталась
+        //public IActionResult ProductDetails() { return View(); }//разобраться с вьюшекой - она осаталась
+        //public IActionResult Shop() { return View(); }//разобраться с вьюшекой - она осаталась
+        public IActionResult Error404() { return View(); }
         public IActionResult BlogSingle() { return View(); }
+
+        public object ErrorStatus(string id)//метод возвращает просто текст ответа
+        {
+            switch (id)
+            {
+                default:return Content($"Статусный код {id}");
+                case "404": return RedirectToAction(nameof(Error404));
+            }
+        }
+
         public IActionResult Blog() { return View(); }
-        public IActionResult Cart() { return View(); }
-        public IActionResult Checkout() { return View(); }
+        //public IActionResult Cart() { return View(); }//разобраться с вьюшекой - она осаталась
+        //public IActionResult Checkout() { return View(); }//разобраться с вьюшекой - она осаталась
 
         public IActionResult TestAction()
         {
