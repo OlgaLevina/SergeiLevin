@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Domain.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace SergeiLevin0.Controllers
 {
@@ -29,14 +30,20 @@ namespace SergeiLevin0.Controllers
                     Name = product.Name,
                     Order = product.Order,
                     ImageUrl = product.ImageUrl,
-                    Price = product.Price
+                    Price = product.Price,
+                    Brand=product.Brand.Name
                 }).OrderBy(product => product.Order)
             });
         }
-        public IActionResult ProductDetails(int id)
+        public IActionResult ProductDetails(int id, [FromServices] ILogger<CatalogController> logger)
         {
             var product = ProductData.GetProductById(id);
-            if (product is null) return NotFound();
+            if (product is null)
+            {
+                logger.LogWarning($"Заправшиваемый товар {id} отсутствует в каталоге");
+                return NotFound();
+            }
+            logger.LogInformation($"Товар {id} найден");
             return View(new ProductViewModel
             {
                 Id =product.Id,

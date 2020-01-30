@@ -57,7 +57,7 @@ namespace SergeiLevin0.Tests.Controllers
             Assert.Equal(nameof(HomeController.Error404), redirect_to_action.ActionName);//проверяем, что действие, куда нас направили является Эррор404
         }
 
-        [TestMethod]
+        [TestMethod, ExpectedException(typeof(ApplicationException))]
         public void ThrowException_throw_Application()//в контроллере нет - досоздаем
         {
             var controller = new HomeController();
