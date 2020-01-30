@@ -24,7 +24,7 @@ namespace SergeiLevin0.Controllers
             CartService.AddToCart(id);
             return RedirectToAction("Details");
         }
-        public IActionResult DecrimentToCart(int id)
+        public IActionResult DecrimentFromCart(int id)
         {
             CartService.DecrimentFromCart(id);
             return RedirectToAction("Details");

@@ -19,7 +19,7 @@ using SergeiLevin0.Interfaces;
 using SergeiLevin0.Services;
 using Swashbuckle.AspNetCore.Swagger;
 using SergeiLevin.Logger;
-
+using SergeiLevin0.Interfaces.Services;
 
 namespace SergeiLevin0.ServiceHosting
 {
@@ -62,7 +62,8 @@ namespace SergeiLevin0.ServiceHosting
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ICartService, CookieCartService>();
+            services.AddScoped<ICartService, Services.CartService>();
+            services.AddScoped<ICartStore, CookiesCartStore>();
             services.AddSwaggerGen(opt=> //система вэб документации, которая автоматически формирует джэйсон-документацию по нашему вэбайпи, а также формирует вэб-интерфэйс, который показывает эту документацию и позволяет тестировать методы вэб-запросы (не только get, но и остальные)
             {
                 opt.SwaggerDoc("v1", new Info { Title = "SergeiLevin.API", Version = "v1" });//конфигурация 1й версии документации
