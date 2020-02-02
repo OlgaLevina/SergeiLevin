@@ -2535,6 +2535,9 @@ h2.title {
   color: #FE980F;
 }
 
+.panel-body ul li.active {
+    text-decoration: underline
+} 
 
 
 @charset "UTF-8";
