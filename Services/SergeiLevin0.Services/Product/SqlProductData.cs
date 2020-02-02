@@ -36,7 +36,10 @@ namespace SergeiLevin0.Infrastructure.Services
                 query = query.Where(product => product.CategoryId == filter.CategoryId);
             if (filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == filter.BrandId);
-            return query.AsEnumerable().Select(ProductMapper.ToDTO
+            return query
+                .Include(p=>p.Brand)
+                .Include(p=>p.Category)
+                .AsEnumerable().Select(ProductMapper.ToDTO
                 //p => new ProductDTO // замена на мэппинг
                 //{
                 //    Id = p.Id,
