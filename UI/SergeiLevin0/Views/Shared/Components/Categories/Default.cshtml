@@ -16,7 +16,7 @@
                         </a>
                     </h4>
                 </div>
-                <div id="@parent_category.Name.ToLower()" class="panel-collapse collapse">
+                <div id="@parent_category.Name.ToLower()" class="panel-collapse collapse @(parent_category.Id == Model.CurrentParentCategory ? "in" : null)">
                     <div class="panel-body">
                         <ul>
                             @foreach (var child_category in parent_category.ChildCategories)

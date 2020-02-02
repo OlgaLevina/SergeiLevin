@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SergeiLevin0.Domain;
 
 namespace SergeiLevin0.Components
 {
@@ -12,7 +13,13 @@ namespace SergeiLevin0.Components
     {
         private readonly IProductData ProductData;
         public BrandsViewComponent(IProductData productData) => ProductData = productData;
-        public IViewComponentResult Invoke() => View(GetBrands());
+        //public IViewComponentResult Invoke() => View(GetBrands());
+        public IViewComponentResult Invoke(string BrandId) =>
+            View(new BrandCompleteViewModel
+            {
+                Brands = GetBrands(),
+                CurrentBrandId = int.TryParse(BrandId, out var id) ? id : (int?)null
+            });
         private IEnumerable<BrandViewModel> GetBrands() =>
             ProductData.GetBrands().Select(brand => new BrandViewModel
             {
