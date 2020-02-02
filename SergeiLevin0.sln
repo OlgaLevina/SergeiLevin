@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDE49590
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLevin0.Tests", "Tests\SergeiLevin.Tests\SergeiLevin0.Tests.csproj", "{76D065CC-8E19-4FB9-9AC9-913AC5622260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SergeiLeivn0.Services.Tests", "Tests\SergeiLeivn0.Services.Tests\SergeiLeivn0.Services.Tests.csproj", "{80067E1A-4116-45F4-8A5E-B843BBF6B3DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SergeiLeivn0.Services.Tests", "Tests\SergeiLeivn0.Services.Tests\SergeiLeivn0.Services.Tests.csproj", "{80067E1A-4116-45F4-8A5E-B843BBF6B3DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
