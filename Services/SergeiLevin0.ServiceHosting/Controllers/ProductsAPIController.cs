@@ -22,7 +22,7 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         [HttpGet("brands")]
         public IEnumerable<Brand> GetBrands()=> ProductData.GetBrands();
         [HttpGet("brands/{id}")]
-        public Brand GetBrandById(int id) => GetBrandById(id);
+        public Brand GetBrandById(int id) => ProductData.GetBrandById(id);
         [HttpGet("categories")]
         public IEnumerable<Category> GetCategories()=>ProductData.GetCategories();
         [HttpGet("categories/{id}")]
