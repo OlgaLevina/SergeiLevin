@@ -13,6 +13,6 @@ namespace SergeiLevin0.Domain.DTO.Products
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public BrandDTO Brand { get; set; }
-        public CategoryDTO Catefory { get; set; }
+        public CategoryDTO Category { get; set; }
     }
 }
