@@ -10,7 +10,9 @@ namespace SergeiLevin0.Interfaces
     public interface IProductData
     {
         IEnumerable<Category> GetCategories();
+        Category GetCategoryById(int id);
         IEnumerable<Brand> GetBrands();
+        Brand GetBrandById(int id);
         IEnumerable<ProductDTO> GetProducts(ProductFilter filter=null);
         ProductDTO GetProductById(int id);
     }

@@ -13,6 +13,7 @@ namespace SergeiLevin0.Services.Map
             Name = product.Name,
             ImageUrl=product.ImageUrl,
             Brand=product.Brand.ToDTO(),
+            Catefory=product.Category.ToDTO(),
             Order=product.Order,
             Price=product.Price
         };
@@ -23,7 +24,8 @@ namespace SergeiLevin0.Services.Map
             Brand = product.Brand.FromDTO(),
             BrandId=product.Brand?.Id,
             Order = product.Order,
-            Price = product.Price 
+            Price = product.Price,
+            Category=product.Catefory.FromDTO()
         };
     }
 }

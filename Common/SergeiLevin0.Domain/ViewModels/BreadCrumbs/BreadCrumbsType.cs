@@ -7,7 +7,7 @@ namespace SergeiLevin0.Domain.ViewModels.BreadCrumbs
     public enum BreadCrumbsType : byte
     {
         None,
-        Section,
+        Category,
         Brand,
         Product
     }

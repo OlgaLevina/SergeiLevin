@@ -21,8 +21,12 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         //по умолчанию адрес конечной точки - адрес контроллера / адрес метода - поэтому меняем, как нам надо
         [HttpGet("brands")]
         public IEnumerable<Brand> GetBrands()=> ProductData.GetBrands();
+        [HttpGet("brands/{id}")]
+        public Brand GetBrandById(int id) => GetBrandById(id);
         [HttpGet("categories")]
         public IEnumerable<Category> GetCategories()=>ProductData.GetCategories();
+        [HttpGet("categories/{id}")]
+        public Category GetCategoryById(int id) => ProductData.GetCategoryById(id);
         [HttpGet("{id}"), ActionName("Get")]
         public ProductDTO GetProductById(int id)=> ProductData.GetProductById(id);
         [HttpPost, ActionName("Post")]
