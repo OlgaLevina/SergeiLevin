@@ -21,6 +21,8 @@ using SergeiLevin0.Clients.Employees;
 using SergeiLevin0.Clients.Products;
 using SergeiLevin0.Clients.Orders;
 using SergeiLevin0.Clients.Identity;
+using Microsoft.Extensions.Logging;
+using SergeiLevin.Logger;
 
 namespace SergeiLevin0
 {
@@ -90,8 +92,9 @@ namespace SergeiLevin0
 
         //содержит промежуточное ПО, которое добавляется к нашему приложению через app.Use..., и формируют конвеер обработки входящих запросов в той послеовательности, как добавленяется.
         //потом удалить параметр data или переделать!!!!
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IEmpoyeesData data) //в параметрах можно указать зарегистрированные сервисы, например IEmpoyeesData; сервисы можно заправшивать так же в контроллерах  и других частях приложения
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IEmpoyeesData data, ILoggerFactory log) //в параметрах можно указать зарегистрированные сервисы, например IEmpoyeesData; сервисы можно заправшивать так же в контроллерах  и других частях приложения
         {
+            log.AddLog4Net();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //ПО занимающиеея отслеживанием ошибок - позволяет отселдить, что не так

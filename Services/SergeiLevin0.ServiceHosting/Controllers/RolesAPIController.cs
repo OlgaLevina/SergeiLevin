@@ -40,13 +40,21 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         public async Task<string> GetRoleNameAsync(Role role) => await RoleStore.GetRoleNameAsync(role);
 
         [HttpPost("SetRoleName/{roleName}")]
-        public Task SetRoleNameAsync(Role role, string roleName) => RoleStore.SetRoleNameAsync(role, roleName);
+        public async Task SetRoleNameAsync(Role role, string roleName)
+        {
+            await RoleStore.SetRoleNameAsync(role, roleName);
+            await RoleStore.UpdateAsync(role);
+        }
 
         [HttpPost("GetNormalizedRoleName")]
         public async Task<string> GetNormalizedRoleNameAsync(Role role) => await RoleStore.GetRoleNameAsync(role);
 
         [HttpPost("SetNormalizedRoleName/{normalizedName}")]
-        public Task SetNormalizedRoleNameAsync(Role role, string normalizedName) => RoleStore.SetNormalizedRoleNameAsync(role, normalizedName);
+        public async Task SetNormalizedRoleNameAsync(Role role, string normalizedName)
+        {
+            await RoleStore.SetNormalizedRoleNameAsync(role, normalizedName);
+            await RoleStore.UpdateAsync(role);
+        }
 
         [HttpGet("FindById/{roleId}")]
         public async Task<Role> FindByIdAsync(string roleId) => await RoleStore.FindByIdAsync(roleId);

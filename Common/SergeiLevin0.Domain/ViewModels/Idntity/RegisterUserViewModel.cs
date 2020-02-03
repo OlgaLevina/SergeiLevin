@@ -1,4 +1,5 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace SergeiLevin0.Domain.ViewModels.Idntity
         [Required]
         [MaxLength(256)]
         [Display(Name ="Имя Пользователя")]
-        //[Remote(nameof(Controllers.AccountController.IsNameFree), "Account")]//проверка новизны имени!
+        [Remote("IsNameFree", "Account", ErrorMessage ="Such user is already exist")]//проверка новизны имени!
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]//указываем, что это пароль и его нужно скрыть звездочками

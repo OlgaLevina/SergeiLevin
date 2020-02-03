@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SergeiLevin0.DAL.Context;
 using SergeiLevin0.Domain.Entities.Identity;
 using System;
@@ -14,12 +15,14 @@ namespace SergeiLevin0.Services
         private readonly SergeiLevinContext Db;
         private readonly UserManager<User> UserManager;
         private readonly RoleManager<Role> RoleManager;
+        private readonly ILogger<SergeiLevinContextInitializer> logger;//для отслеживания работы с базой - потом добавить!!!
 
-        public SergeiLevinContextInitializer(SergeiLevinContext db, UserManager<User> userManager, RoleManager<Role> roleManager)//в методичке иначе - здесь проще
+        public SergeiLevinContextInitializer(SergeiLevinContext db, UserManager<User> userManager, RoleManager<Role> roleManager, ILogger<SergeiLevinContextInitializer> Logger)//в методичке иначе - здесь проще
         {
             Db = db;
             UserManager = userManager;
             RoleManager = roleManager;
+            logger = Logger;
         }
 
         public async Task InitializeAsync()//инициализатор бд следит за тем, чтобы она существовала и имела данные
@@ -80,7 +83,11 @@ namespace SergeiLevin0.Services
                 if(creation_result.Succeeded)
                     await UserManager.AddToRoleAsync(admin, Role.Administrator);//добавляем, если отсутствует
                 else
-                    throw new InvalidOperationException($"Ошибка при создании администратора в БД {string.Join(", ", creation_result.Errors.Select(e => e.Description))}");
+                {
+                    var errors = string.Join(",", creation_result.Errors.Select(e => e.Description));
+                    logger.LogError($"Ошибка при создании пользователя Администратоора в бд {errors}");
+                    throw new InvalidOperationException($"Ошибка при создании администратора в БД {errors}");
+                }
             }
         }
 

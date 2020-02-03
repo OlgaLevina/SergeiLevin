@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SergeiLevin0.ServiceHosting</name>
+    </assembly>
+    <members>
+        <member name="M:SergeiLevin0.ServiceHosting.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            конфигурация приложения
+            </summary>
+            <param name="services">интерфейс сервисов</param>
+        </member>
+    </members>
+</doc>
