@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SergeiLevin0.Domain.DTO.Orders;
 using Microsoft.Extensions.Logging;
+using SergeiLevin0.Services.Map;
 
 namespace SergeiLevin0.Infrastructure.Services
 {
@@ -61,56 +62,20 @@ namespace SergeiLevin0.Infrastructure.Services
                     Db.SaveChanges();
                     transaction.Commit();
                     logger.LogInformation($"New order with products was saved in db!");
-                    return new OrderDTO
-                    {
-                        Address = order.Address,
-                        Date = order.Date,
-                        Phone = order.Phone,
-                        OrderItems = order.OrderItems.Select(item => new OrderItemDTO
-                        {
-                            Id = item.Id,
-                            Price = item.Price,
-                            Quantity = item.Quantity
-                        })
-                    };
+                    return order.ToDTO();
                 }
             }
         }
 
-        public OrderDTO GetOrderById(int id)
-        {
-            var o=Db.Orders
+        public OrderDTO GetOrderById(int id)=>
+            Db.Orders
               .Include(order => order.OrderItems)
-              .FirstOrDefault(order => order.Id == id);
-            return o is null ? null : new OrderDTO
-            {
-                Phone = o.Phone,
-                Address = o.Address,
-                Date = o.Date,
-                OrderItems = o.OrderItems.Select(item => new OrderItemDTO
-                {
-                    Id = item.Id,
-                    Price = item.Price,
-                    Quantity = item.Quantity
-                })
-
-            };
-        }
+              .FirstOrDefault(order => order.Id == id).ToDTO();
 
         public IEnumerable<OrderDTO> GetUserOrders(string userName) => Db.Orders
             .Include(order => order.User)
             .Include(order => order.OrderItems)
-            .Where(order => order.User.UserName == userName).Select(o => new OrderDTO
-            {
-                Address=o.Address,
-                Date=o.Date,
-                Phone=o.Phone,
-                OrderItems=o.OrderItems.Select(item => new OrderItemDTO
-                {
-                    Id=item.Id,
-                    Price=item.Price,
-                    Quantity=item.Quantity
-                })
-            });
+            .Where(order => order.User.UserName == userName).Select(OderMapper.ToDTO);
+
     }
 }

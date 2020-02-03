@@ -3,6 +3,7 @@ using SergeiLevin0.DAL.Context;
 using SergeiLevin0.Domain.DTO.Products;
 using SergeiLevin0.Domain.Entities;
 using SergeiLevin0.Interfaces;
+using SergeiLevin0.Services.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,40 +36,38 @@ namespace SergeiLevin0.Infrastructure.Services
                 query = query.Where(product => product.CategoryId == filter.CategoryId);
             if (filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == filter.BrandId);
-            return query.AsEnumerable().Select(
-                p => new ProductDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Order = p.Order,
-                    Price = p.Price,
-                    ImageUrl = p.ImageUrl,
-                    Brand = p.Brand is null ? null : new BrandDTO
-                    {
-                        Id = p.Brand.Id,
-                        Name = p.Brand.Name
-                    }
-                });//query.ToArray() - можно вместо asenumerable
+            return query.AsEnumerable().Select(ProductMapper.ToDTO
+                //p => new ProductDTO // замена на мэппинг
+                //{
+                //    Id = p.Id,
+                //    Name = p.Name,
+                //    Order = p.Order,
+                //    Price = p.Price,
+                //    ImageUrl = p.ImageUrl,
+                //    Brand = p.Brand is null ? null : new BrandDTO
+                //    {
+                //        Id = p.Brand.Id,
+                //        Name = p.Brand.Name
+                //    }
+                //});//query.ToArray() - можно вместо asenumerable
+                );
         }
-        public ProductDTO GetProductById(int id)
-        {
-            var product = Db.Products
+        public ProductDTO GetProductById(int id)=>
+            Db.Products
             .Include(p => p.Brand)
             .Include(p => p.Category)
-            .FirstOrDefault(p => p.Id == id);
-            return product is null ? null : new ProductDTO
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Order = product.Order,
-                Price = product.Price,
-                ImageUrl = product.ImageUrl,
-                Brand = product.Brand is null ? null : new BrandDTO
-                {
-                    Id = product.Brand.Id,
-                    Name = product.Brand.Name
-                }
-            };
-        }
+            .FirstOrDefault(p => p.Id == id).ToDTO();
+            //return product is null ? null : new ProductDTO
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    Order = product.Order,
+            //    Price = product.Price,
+            //    ImageUrl = product.ImageUrl,
+            //    Brand = product.Brand is null ? null : new BrandDTO
+            //    {
+            //        Id = product.Brand.Id,
+            //        Name = product.Brand.Name
+            //    }
     }
 }
