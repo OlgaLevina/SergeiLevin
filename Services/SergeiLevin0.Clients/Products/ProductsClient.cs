@@ -22,7 +22,7 @@ namespace SergeiLevin0.Clients.Products
 
         public Brand GetBrandById(int id) => Get<Brand>($"{ServiceAddress}/brands/{id}");
 
-        public ProductDTO GetProductById(int id) => Get<ProductDTO>($"{ServiceAddress}/{id};");
+        public ProductDTO GetProductById(int id) => Get<ProductDTO>($"{ServiceAddress}/{id}");
 
         public IEnumerable<ProductDTO> GetProducts(ProductFilter filter = null) => Post(ServiceAddress, filter).Content.ReadAsAsync<List<ProductDTO>>().Result;
     }

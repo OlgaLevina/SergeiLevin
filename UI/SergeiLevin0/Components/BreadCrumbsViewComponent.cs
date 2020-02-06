@@ -4,6 +4,8 @@ using SergeiLevin0.Domain.ViewModels.BreadCrumbs;
 using SergeiLevin0.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using SergeiLevin0.Controllers;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,8 +15,10 @@ namespace SergeiLevin0.Components
     {
         private readonly IProductData ProductData;
         public BreadCrumbsViewComponent(IProductData productData) => ProductData = productData;
-        public IViewComponentResult Invoke(BreadCrumbsType Type, int id, BreadCrumbsType FromType)
+        //public IViewComponentResult Invoke(BreadCrumbsType Type, int id, BreadCrumbsType FromType)
+        public IViewComponentResult Invoke()
         {
+            GetParameters(out var Type, out var id, out var FromType);
             switch (Type)
             {
                 default: return View(Array.Empty<BreadCrumbViewModel>());
@@ -41,6 +45,34 @@ namespace SergeiLevin0.Components
 
                 case BreadCrumbsType.Product:
                     return View(GetProductBreadCrumbs(ProductData.GetProductById(id), FromType));
+            }
+        }
+
+        private void GetParameters(out BreadCrumbsType Type, out int id, out BreadCrumbsType FromType)//вынесли подготовку данных из представления в метод
+        {
+            if (Request.Query.ContainsKey("CtegoryId")) Type = BreadCrumbsType.Category;
+            else
+                Type = Request.Query.ContainsKey("BrandId")
+                    ? BreadCrumbsType.Brand
+                    : BreadCrumbsType.None;
+            if ((string)ViewContext.RouteData.Values["action"] == nameof(CatalogController.ProductDetails))
+                Type = BreadCrumbsType.Product;
+            id = 0;
+            FromType = BreadCrumbsType.Category;
+            switch (Type)
+            {
+                default: throw new ArgumentOutOfRangeException();
+                case BreadCrumbsType.None: break;
+                case BreadCrumbsType.Category:
+                    id = int.Parse(Request.Query["CategoryId"].ToString());
+                    break;
+                case BreadCrumbsType.Brand:
+                    id = int.Parse(Request.Query["BrandId"].ToString());
+                    break;
+                case BreadCrumbsType.Product:
+                    id = int.Parse(ViewContext.RouteData.Values["id"].ToString());
+                    if (Request.Query.ContainsKey("FromBrand")) FromType = BreadCrumbsType.Brand;
+                    break;
             }
         }
 

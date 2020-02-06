@@ -1,35 +1,35 @@
 ﻿@{
     Layout = "_LayoutBase";
-    BreadCrumbsType type;
-    if (Context.Request.Query.ContainsKey("CategoryId")) { type = BreadCrumbsType.Category; }//если ключом является категоря, то она - хлебная крошка
-    else
-    {
-        type = Context.Request.Query.ContainsKey("BrandId") //иначе проверяем на брэнд
-            ? BreadCrumbsType.Brand
-            : BreadCrumbsType.None;
-    }
+    //BreadCrumbsType type;
+    //if (Context.Request.Query.ContainsKey("CategoryId")) { type = BreadCrumbsType.Category; }//если ключом является категоря, то она - хлебная крошка
+    //else
+    //{
+    //    type = Context.Request.Query.ContainsKey("BrandId") //иначе проверяем на брэнд
+    //        ? BreadCrumbsType.Brand
+    //        : BreadCrumbsType.None;
+    //}
 
-    if ((string)ViewContext.RouteData.Values["action"] == nameof(CatalogController.ProductDetails)) //проверка не зашли ли мы в конкретный товар
-    {type = BreadCrumbsType.Product;}
+    //if ((string)ViewContext.RouteData.Values["action"] == nameof(CatalogController.ProductDetails)) //проверка не зашли ли мы в конкретный товар
+    //{type = BreadCrumbsType.Product;}
 
-    var id = 0;
-    var from_type = BreadCrumbsType.Category;//условно назначаем тип предыдущей хлебной крошки, как секция
-    
-    switch (type) //в зависимости от типа текущей крошки меняем значение предыдущей
-    {
-        default: throw new ArgumentOutOfRangeException();
-        case BreadCrumbsType.None: break;
-        case BreadCrumbsType.Category:
-            id = int.Parse(Context.Request.Query["CategoryId"].ToString());
-            break;
-        case BreadCrumbsType.Brand:
-            id = int.Parse(Context.Request.Query["BrandId"].ToString());
-            break;
-        case BreadCrumbsType.Product:
-            id = int.Parse(ViewContext.RouteData.Values["id"].ToString());
-            if (Context.Request.Query.ContainsKey("FromBrand")) { from_type = BreadCrumbsType.Brand; }
-            break;
-    }
+    //var id = 0;
+    //var from_type = BreadCrumbsType.Category;//условно назначаем тип предыдущей хлебной крошки, как секция
+
+    //switch (type) //в зависимости от типа текущей крошки меняем значение предыдущей
+    //{
+    //    default: throw new ArgumentOutOfRangeException();
+    //    case BreadCrumbsType.None: break;
+    //    case BreadCrumbsType.Category:
+    //        id = int.Parse(Context.Request.Query["CategoryId"].ToString());
+    //        break;
+    //    case BreadCrumbsType.Brand:
+    //        id = int.Parse(Context.Request.Query["BrandId"].ToString());
+    //        break;
+    //    case BreadCrumbsType.Product:
+    //        id = int.Parse(ViewContext.RouteData.Values["id"].ToString());
+    //        if (Context.Request.Query.ContainsKey("FromBrand")) { from_type = BreadCrumbsType.Brand; }
+    //        break;
+    //}
 }
 
 <div class="container">
@@ -39,7 +39,8 @@
             <li class="active">Shopping Cart</li>
         </ol>
     </div-->
-    <vc:bread-crumbs type="@type" id="@id" from-type="@from_type"/>
+    <vc:bread-crumbs/>
+
 
     @RenderBody()
 </div>
