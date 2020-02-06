@@ -124,7 +124,7 @@ namespace SergeiLeivn0.Services.Tests.Product
                 var cart_store_mock = new Mock<ICartStore>();
                 cart_store_mock.Setup(c => c.Cart).Returns(cart);
                 var cart_service = new CartService(product_data_mock.Object, cart_store_mock.Object);
-                cart_service.DecrimentFromCart(item_id);
+                cart_service.DecrementFromCart(item_id);
                 Assert.Equal(7, cart.ItemsCount);
                 Assert.Equal(2, cart.Items.Count);
                 Assert.Equal(item_id, cart.Items[0].Productid);
@@ -145,7 +145,7 @@ namespace SergeiLeivn0.Services.Tests.Product
                 var cart_store_mock = new Mock<ICartStore>();
                 cart_store_mock.Setup(c => c.Cart).Returns(cart);
                 var cart_service = new CartService(product_data_mock.Object, cart_store_mock.Object);
-                cart_service.DecrimentFromCart(item_id);
+                cart_service.DecrementFromCart(item_id);
                 Assert.Equal(5, cart.ItemsCount);
                 Assert.Single(cart.Items);
             }

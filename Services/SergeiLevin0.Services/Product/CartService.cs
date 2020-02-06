@@ -32,7 +32,7 @@ namespace SergeiLevin0.Services
             cartStore.Cart = cart;
         }
 
-        public void DecrimentFromCart(int id)
+        public void DecrementFromCart(int id)
         {
             var cart = cartStore.Cart;
             var item = cart.Items.FirstOrDefault(i => i.Productid == id);

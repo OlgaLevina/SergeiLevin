@@ -24,9 +24,9 @@ namespace SergeiLevin0.Controllers
             CartService.AddToCart(id);
             return RedirectToAction("Details");
         }
-        public IActionResult DecrimentFromCart(int id)
+        public IActionResult DecrementFromCart(int id)
         {
-            CartService.DecrimentFromCart(id);
+            CartService.DecrementFromCart(id);
             return RedirectToAction("Details");
         }
         public IActionResult RemoveFromCart(int id)
@@ -68,5 +68,34 @@ namespace SergeiLevin0.Controllers
             ViewBag.Orderid = id;
             return View();
         }
+        
+        #region API
+        //создаем дубликаты наших методов делающих тоже самое, но иначе - сохраним обратную совместимость что бы можно было работать как раньше и поновому в асинхронном режиме.
+        public IActionResult AddToCartAPI(int id)
+        {
+            CartService.AddToCart(id);
+            return Json(new { id, message = $"Товар id:{id} успешно добавлен в корзину" });
+        }
+
+        public IActionResult DecrementFromCartAPI(int id)
+        {
+            CartService.DecrementFromCart(id);
+            return Json(new { id, message = $"Количество товара id:{id} в корзине уменьшено на 1" });
+        }
+
+        public IActionResult RemoveFromCartAPI(int id)
+        {
+            CartService.RemoveFromCart(id);
+            return Json(new { id, message = $"Товар id:{id} удалён из корзины" });
+        }
+
+        public IActionResult RemoveAllAPI()
+        {
+            CartService.RemoveAll();
+            return Json(new { message = "Корзина очищена" });
+        }
+
+        public IActionResult GetCartView() => ViewComponent("Cart");//для рендеринга представления, в ответ на запрос будет отправляться не целиком страничка, а только частичное представление корзины 
+        #endregion
     }
 }
