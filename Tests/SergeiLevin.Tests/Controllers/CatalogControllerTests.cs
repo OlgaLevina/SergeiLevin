@@ -14,6 +14,8 @@ using SergeiLevin0.Domain.ViewModels;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Interfaces.Api;
 using Assert = Xunit.Assert;
+using Castle.Core.Configuration;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 
 namespace SergeiLevin0.Tests.Controllers
@@ -55,7 +57,8 @@ namespace SergeiLevin0.Tests.Controllers
                 Products = products,
                 TotalCount = products.Length
             });
-            var controller = new CatalogController(product_data_mock.Object);
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             var logger_mock = new Mock<ILogger<CatalogController>>();//мок под логгер
             #endregion
 
@@ -81,7 +84,8 @@ namespace SergeiLevin0.Tests.Controllers
             product_data_mock
                .Setup(p => p.GetProductById(It.IsAny<int>()))
                .Returns(default(ProductDTO));//т.е. нулл
-            var controller = new CatalogController(product_data_mock.Object);
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             var result = controller.ProductDetails(1, logger_mock.Object);
             Assert.IsType<NotFoundResult>(result);
         }
@@ -125,8 +129,8 @@ namespace SergeiLevin0.Tests.Controllers
                     Products=products,
                     TotalCount=products.Length
                 });
-
-            var controller = new CatalogController(product_data_mock.Object);
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             const int expected_category_id = 1;
             const int expected_brand_id = 5;
             var result = controller.Shop(expected_category_id, expected_brand_id);
