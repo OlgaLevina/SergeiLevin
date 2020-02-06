@@ -24,6 +24,7 @@ using SergeiLevin0.Clients.Identity;
 using Microsoft.Extensions.Logging;
 using SergeiLevin.Logger;
 using SergeiLevin0.Infrastructure.Middleware;
+using SergeiLevin0.Interfaces.Services;
 
 namespace SergeiLevin0
 {
@@ -52,6 +53,7 @@ namespace SergeiLevin0
             //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartStore, CookiesCartStore>();
             //services.AddScoped<IOrderService, SqlOrderService>();
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddTransient<IValuesService, ValuesClient>();
