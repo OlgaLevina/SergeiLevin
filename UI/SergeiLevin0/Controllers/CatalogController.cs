@@ -6,25 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Domain.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace SergeiLevin0.Controllers
 {
     public class CatalogController : Controller
     {
         private readonly IProductData ProductData;
-        public CatalogController(IProductData productData) { ProductData = productData; }
-        public IActionResult Shop(int? categoriId, int? brandId)
+        private readonly IConfiguration Configuration;
+
+        public CatalogController(IProductData productData, IConfiguration configuration)
         {
+            ProductData = productData;
+            Configuration = configuration;
+        }
+        public IActionResult Shop(int? categoriId, int? brandId, int Page=1)
+        {
+            var page_size = int.TryParse(Configuration["PageSize"], out var size) ? size : (int?)null;
             var products = ProductData.GetProducts(new Domain.Entities.ProductFilter
             {
                 CategoryId = categoriId,
-                BrandId = brandId
+                BrandId = brandId,
+                Page = Page,
+                PageSize = page_size
             });
             return View(new CatalogViewModel
             {
                 CategoryId = categoriId,
                 BrandId = brandId,
-                Products = products.Select(product => new ProductViewModel
+                Products = products.Products.Select(product => new ProductViewModel
                 {
                     Id = product.Id,
                     Name = product.Name,

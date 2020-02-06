@@ -64,7 +64,7 @@ namespace SergeiLevin0.Services
             {
                 Ids = cartStore.Cart.Items.Select(item => item.Productid).ToList()
             });
-            var products_view_models = products.Select(p => new ProductViewModel
+            var products_view_models = products.Products.Select(p => new ProductViewModel
             {
                 Id = p.Id,
                 Name = p.Name,

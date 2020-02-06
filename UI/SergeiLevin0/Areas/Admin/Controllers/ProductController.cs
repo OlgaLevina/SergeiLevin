@@ -17,7 +17,7 @@ namespace SergeiLevin0.Areas.Admin.Controllers
 
         public ProductController(IProductData productData) => ProductData = productData;
 
-        public IActionResult List() => View(ProductData.GetProducts());
+        public IActionResult List() => View(ProductData.GetProducts().Products);
         public IActionResult Edit(int? id) => View();//потом доработать представления по редактированию!!!
         public IActionResult Delete(int? id) => View();
         [HttpPost, ActionName(nameof(Delete))]

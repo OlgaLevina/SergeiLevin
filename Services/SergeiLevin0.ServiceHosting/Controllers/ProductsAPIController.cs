@@ -30,6 +30,6 @@ namespace SergeiLevin0.ServiceHosting.Controllers
         [HttpGet("{id}"), ActionName("Get")]
         public ProductDTO GetProductById(int id)=> ProductData.GetProductById(id);
         [HttpPost, ActionName("Post")]
-        public IEnumerable<ProductDTO> GetProducts([FromBody]ProductFilter filter = null)=> ProductData.GetProducts(filter);
+        public PagedProductDTO GetProducts([FromBody]ProductFilter filter = null)=> ProductData.GetProducts(filter);
     }
 }

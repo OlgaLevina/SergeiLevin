@@ -13,7 +13,7 @@ namespace SergeiLevin0.Interfaces
         Category GetCategoryById(int id);
         IEnumerable<Brand> GetBrands();
         Brand GetBrandById(int id);
-        IEnumerable<ProductDTO> GetProducts(ProductFilter filter=null);
+        PagedProductDTO GetProducts(ProductFilter filter=null);
         ProductDTO GetProductById(int id);
     }
 }

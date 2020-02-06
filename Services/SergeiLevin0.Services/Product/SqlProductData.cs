@@ -31,31 +31,27 @@ namespace SergeiLevin0.Infrastructure.Services
             .AsEnumerable();
         public Category GetCategoryById(int id) => Db.Categories.FirstOrDefault(s => s.Id == id);
 
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter = null)
+        public PagedProductDTO GetProducts(ProductFilter filter = null)
         {
             IQueryable<Product> query = Db.Products;
             if (filter?.CategoryId != null)
                 query = query.Where(product => product.CategoryId == filter.CategoryId);
             if (filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == filter.BrandId);
-            return query
-                .Include(p=>p.Brand)
-                .Include(p=>p.Category)
-                .AsEnumerable().Select(ProductMapper.ToDTO
-                //p => new ProductDTO // замена на мэппинг
-                //{
-                //    Id = p.Id,
-                //    Name = p.Name,
-                //    Order = p.Order,
-                //    Price = p.Price,
-                //    ImageUrl = p.ImageUrl,
-                //    Brand = p.Brand is null ? null : new BrandDTO
-                //    {
-                //        Id = p.Brand.Id,
-                //        Name = p.Brand.Name
-                //    }
-                //});//query.ToArray() - можно вместо asenumerable
-                );
+            var total_count = query.Count();
+            if (filter?.PageSize != null)
+                query = query
+                   .Skip((filter.Page - 1) * (int)filter.PageSize)
+                   .Take((int)filter.PageSize);
+            return new PagedProductDTO
+            {
+                Products = query
+                   .Include(p => p.Brand)
+                   .Include(p => p.Category)
+                   .AsEnumerable()
+                   .Select(ProductMapper.ToDTO),
+                TotalCount = total_count
+            };
         }
         public ProductDTO GetProductById(int id)=>
             Db.Products
