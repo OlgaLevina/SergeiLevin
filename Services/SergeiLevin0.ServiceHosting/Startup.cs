@@ -62,7 +62,7 @@ namespace SergeiLevin0.ServiceHosting
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ICartService, Services.CartService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddScoped<ICartStore, CookiesCartStore>();
             services.AddSwaggerGen(opt=> //система вэб документации, которая автоматически формирует джэйсон-документацию по нашему вэбайпи, а также формирует вэб-интерфэйс, который показывает эту документацию и позволяет тестировать методы вэб-запросы (не только get, но и остальные)
             {

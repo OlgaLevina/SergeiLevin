@@ -1,14 +1,14 @@
 ﻿<!--script src="~/lib/jquery/jquery.min.js"></!--script> <!--not min; заменяем на интернет-размещение-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js" 
-        integrity="sha256-ihAoc6M/JPfrIiIeayPE9xjin4UWjsx2mjW/rtmxLM4=" 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"
+        integrity="sha256-ihAoc6M/JPfrIiIeayPE9xjin4UWjsx2mjW/rtmxLM4="
         crossorigin="anonymous"
-        asp-fallback-src="~/lib/jquery/jquery.min.js" 
+        asp-fallback-src="~/lib/jquery/jquery.min.js"
         asp-fallback-test="window.JQuery"></script><!--если контрольная сумма интернет-версии (integrity) не сойдется, то предоставляем браузеру возмоность закачать с нашего сайта; аналогично, если внутри загруженной интернет-библиотеки не будет объекта window.JQuery, то также используется библиотека с нашего сайта-->
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="~/js/jquery.scrollUp.min.js"></script>
 <!--script src="~/lib/prettyPhoto/js/jquery.prettyPhoto.min.js"></!--script> <!--not nim-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.min.js" 
-        integrity="sha256-mWjIE4FAMgUEB4FhgndyTGeQoEULqnYtlaIU8x697zs=" 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.min.js"
+        integrity="sha256-mWjIE4FAMgUEB4FhgndyTGeQoEULqnYtlaIU8x697zs="
         crossorigin="anonymous"
         asp-fallback-src="~/lib/prettyPhoto/js/jquery.prettyPhoto.min.js"></script>
 <!--script src="~/js/price-range.js"></script>
@@ -19,3 +19,12 @@
 <environment exclude="Development">
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 </environment>
+<script src="~/js/Cart/CartLogic.js" asp-append-version="true"></script>
+<script>
+    $(function() {
+        Cart.init({
+            getCartViewLink: "@Url.Action("GetCartView","Cart")",
+            addToCartLink: "@Url.Action("AddToCartAPI","Cart")"
+        });
+    })
+</script> 
