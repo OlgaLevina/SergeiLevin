@@ -42,7 +42,13 @@ namespace SergeiLevin0.Controllers
                     ImageUrl = product.ImageUrl,
                     Price = product.Price,
                     Brand=product.Brand?.Name
-                }).OrderBy(product => product.Order)
+                }).OrderBy(product => product.Order),
+                PageViewModel = new PageViewModel
+                {
+                    PageSize = page_size ?? 0,
+                    PageNumber = Page,
+                    TotalItems = products.TotalCount
+                }
             });
         }
         public IActionResult ProductDetails(int id, [FromServices] ILogger<CatalogController> logger)
