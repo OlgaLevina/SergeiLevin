@@ -68,5 +68,32 @@ namespace SergeiLevin0.Controllers
             ViewBag.Orderid = id;
             return View();
         }
+        #region API
+
+        public IActionResult AddToCartAPI(int id)
+        {
+            CartService.AddToCart(id);
+            return Json(new { id, message = $"Товар id:{id} успешно добавлен в корзину" });
+        }
+
+        public IActionResult DecrementFromCartAPI(int id)
+        {
+            CartService.DecrimentFromCart(id);
+            return Json(new { id, message = $"Количество товара id:{id} в корзине уменьшено на 1" });
+        }
+
+        public IActionResult RemoveFromCartAPI(int id)
+        {
+            CartService.RemoveFromCart(id);
+            return Json(new { id, message = $"Товар id:{id} удалён из корзины" });
+        }
+
+        public IActionResult RemoveAllAPI()
+        {
+            CartService.RemoveAll();
+            return Json(new { message = "Корзина очищена" });
+        }
+        public IActionResult GetCartView() => ViewComponent("Cart");//для рендеринга представления, в ответ на запрос будет отправляться не целиком страничка, а только частичное представление корзины 
+        #endregion
     }
 }
