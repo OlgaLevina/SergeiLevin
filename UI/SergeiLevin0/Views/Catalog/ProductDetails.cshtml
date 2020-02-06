@@ -1,7 +1,9 @@
 ﻿@model ProductViewModel
 @{
+    //Layout = "_BradCrumbsLayout";
     ViewData["Title"] = $"Товар {Model.Name}";
 }
+<vc:bread-crumbs />
 
 <h2>Details</h2>
 

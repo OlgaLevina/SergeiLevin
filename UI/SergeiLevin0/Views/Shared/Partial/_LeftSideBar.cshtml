@@ -1,9 +1,9 @@
 ﻿
 <div class="left-sidebar">
-    @*await Component.InvokeAsync("Categories")// как вариант добавления вьюкомпонента
-    @await Component.InvokeAsync("Brands")*@
-    <vc:categories/><!--вариант при помощи таг-хелперов-->
-    <vc:brands/>
+    @*await Component.InvokeAsync("Categories", new { CategoryId = Context.Request.Query["CategoryId"] })// как вариант добавления вьюкомпонента
+        @await Component.InvokeAsync("Brands")*@
+    <vc:categories category-id="@Context.Request.Query["CategoryId"]"/><!--вариант при помощи таг-хелперов-->
+    <vc:brands brand-id="@Context.Request.Query["BrandId"]"/>
 
     <div class="price-range">
         <!--price-range-->

@@ -31,7 +31,7 @@ namespace SergeiLevin0.Controllers
                     Order = product.Order,
                     ImageUrl = product.ImageUrl,
                     Price = product.Price,
-                    Brand=product.Brand.Name
+                    Brand=product.Brand?.Name
                 }).OrderBy(product => product.Order)
             });
         }

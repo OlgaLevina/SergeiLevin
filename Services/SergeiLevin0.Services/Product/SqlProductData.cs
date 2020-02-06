@@ -24,10 +24,12 @@ namespace SergeiLevin0.Infrastructure.Services
         public IEnumerable<Brand> GetBrands() => Db.Brands
             //.Include(brand => brand.Products)//требует исправления, т.к. имеется цикл, поэтому пока их исключим, а потом переделаем на дто
             .AsEnumerable();
+        public Brand GetBrandById(int id) => Db.Brands.FirstOrDefault(b => b.Id == id);
 
         public IEnumerable<Category> GetCategories() => Db.Categories //загрузка в память
             //.Include(category => category.Products)//требует исправления, т.к. имеется цикл, поэтому пока их исключим, а потом переделаем на дто
             .AsEnumerable();
+        public Category GetCategoryById(int id) => Db.Categories.FirstOrDefault(s => s.Id == id);
 
         public IEnumerable<ProductDTO> GetProducts(ProductFilter filter = null)
         {
@@ -36,7 +38,10 @@ namespace SergeiLevin0.Infrastructure.Services
                 query = query.Where(product => product.CategoryId == filter.CategoryId);
             if (filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == filter.BrandId);
-            return query.AsEnumerable().Select(ProductMapper.ToDTO
+            return query
+                .Include(p=>p.Brand)
+                .Include(p=>p.Category)
+                .AsEnumerable().Select(ProductMapper.ToDTO
                 //p => new ProductDTO // замена на мэппинг
                 //{
                 //    Id = p.Id,
