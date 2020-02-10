@@ -79,7 +79,7 @@ namespace SergeiLevin0.Controllers
         public IActionResult GetFilteredItems(int? CategoryId, int? BrandId, int Page)
         {
             var products = GetProducts(CategoryId, BrandId, Page);
-            return PartialView("Partial/_FeaturesItem");
+            return PartialView("Partial/_FeaturesItem",products);
         }
 
         public IEnumerable<ProductViewModel> GetProducts(int? CategoryId, int? BrandId, int Page)

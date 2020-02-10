@@ -1,6 +1,7 @@
 ﻿@model CatalogViewModel
 @{
     //Layout = "_BradCrumbsLayout";
+    Layout = "_Layout";
     ViewBag.Title = "Shop";
 }
 <vc:bread-crumbs />
@@ -16,14 +17,27 @@
                 <div id="catalog-items-container">
                     <partial name="Partial/_FeaturesItem" model="@Model.Products" />
                 </div>
-                <paging page-model="@Model.PageViewModel"
-                        page-action="Shop"
-                        page-url-SectionId="@Model.CategoryId"
-                        page-url-BrandId="@Model.BrandId">
-                </paging>
+                <div>
+                    <paging page-model="@Model.PageViewModel"
+                            page-action="Shop"
+                            page-url-CategoryId="@Model.CategoryId"
+                            page-url-BrandId="@Model.BrandId">
+                    </paging>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
+@section Scripts
+    {
+    <script src="~/lib/jquery-loading-overlay/loadingoverlay.min.js"></script>
+    <script src="~/js/Shop/ProductItems.js" asp-append-version="true"></script>
+    <script>
+        $(function() {
+            ProductItems.init({
+                getUrl: "@Url.Action("GetFilteredItems", "Catalog")"
+            });
+        })
+    </script>
+}
 

@@ -21,6 +21,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Ll]ogs/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -262,3 +263,9 @@ __pycache__/
 /UI/SergeiLevin0/wwwroot/lib
 /Services/SergeiLevin0.ServiceHosting/Logs
 /UI/SergeiLevin0/Logs
+/UI/SergeiLevin0/wwwroot/css/site.min.css
+/UI/SergeiLevin0/wwwroot/css/site.css
+/UI/SergeiLevin0/wwwroot/js/site.min.js.map
+/UI/SergeiLevin0/wwwroot/js/site.min.js.gz
+/UI/SergeiLevin0/wwwroot/js/site.min.js
+/UI/SergeiLevin0/wwwroot/js/site.js 
