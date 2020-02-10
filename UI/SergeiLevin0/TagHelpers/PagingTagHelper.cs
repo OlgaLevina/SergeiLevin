@@ -23,6 +23,8 @@ namespace SergeiLevin0.TagHelpers
 
         public string PageAction { get; set; }
 
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]//если не добавить, то при переходе со страницы на стануцу перестают правильно работать хлебные крошки (исчетает бренд)
+        //это происходит, т.к. атрибуты page-url-... на странице разметке данный тэг не рассматривает в качестве атрибутов, поэтому через атрибует связываем наш словарь с соответствующими префиксами
         public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
 
         public PagingTagHelper(IUrlHelperFactory urlHelperFactory) => UrlHelperFactory = urlHelperFactory;
