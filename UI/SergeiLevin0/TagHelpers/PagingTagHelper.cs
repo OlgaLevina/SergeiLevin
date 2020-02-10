@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using SergeiLevin0.Domain.ViewModels;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SergeiLevin0.TagHelpers
 {
@@ -48,11 +49,16 @@ namespace SergeiLevin0.TagHelpers
             var a = new TagBuilder("a");
 
             if (PageNumber == PageModel.PageNumber)
-                li.AddCssClass("active");
+            {
+                a.MergeAttribute("data-page", PageModel.PageNumber.ToString());//добавляем к кнопке текущей страницы соответствующий атрибут с ее номером
+                li.AddCssClass("active");//делаем кнопку текущей страницы активной
+            }
             else
             {
                 PageUrlValues["page"] = PageNumber;
-                a.Attributes["href"] = Url.Action(PageAction, PageUrlValues);
+                a.Attributes["href"] = "#";//Url.Action(PageAction, PageUrlValues);//подавляем стандартное поведение ссылки
+                foreach (var (key, value) in PageUrlValues.Where(p => p.Value != null))//добавляем все элементы из словаря обратно в ссылку, т.к. раньше они были в параметрах маршрута, а мы их теперь аннулировали вмете со ссылкой юрл из href. А они нам нужны в будущем для построения запросов к серверу
+                    a.MergeAttribute($"data-{key}", value.ToString());
             }
 
             a.InnerHtml.AppendHtml(PageNumber.ToString());
