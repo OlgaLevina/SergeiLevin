@@ -14,6 +14,8 @@ using SergeiLevin0.Domain.ViewModels;
 using SergeiLevin0.Interfaces;
 using SergeiLevin0.Interfaces.Api;
 using Assert = Xunit.Assert;
+using Castle.Core.Configuration;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 
 namespace SergeiLevin0.Tests.Controllers
@@ -32,22 +34,31 @@ namespace SergeiLevin0.Tests.Controllers
             var expected_name = $"Item id {expected_id}";
             var expected_brand_name = $"Brand of item {expected_id}";
             var product_data_mock = new Mock<IProductData>();//макет
-            product_data_mock
-               .Setup(p => p.GetProductById(It.IsAny<int>()))//получаем любое значение целого типа
-               .Returns<int>(id => new ProductDTO//сконфигурированные данные должны совпасть с ожидаемыми
-               {
-                   Id = id,
-                   Name = $"Item id {id}",
-                   ImageUrl = $"Image_id_{id}.png",
-                   Order = 0,
-                   Price = expected_price,
-                   Brand = new BrandDTO
+            var products = new[]
+            {
+                new ProductDTO
                    {
-                       Id = 1,
-                       Name = $"Brand of item {id}"
+                       Id = expected_id,
+                       Name = $"Item id {expected_id}",
+                       ImageUrl = $"Image_id_{expected_id}.png",
+                       Order = 0,
+                       Price = expected_price,
+                       Brand = new BrandDTO
+                       {
+                           Id = 1,
+                           Name = $"Brand of item {expected_id}"
+                       }
                    }
-               });
-            var controller = new CatalogController(product_data_mock.Object);
+            };
+            product_data_mock
+            .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
+            .Returns<ProductFilter>(filter => new PagedProductDTO
+            {
+                Products = products,
+                TotalCount = products.Length
+            });
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             var logger_mock = new Mock<ILogger<CatalogController>>();//мок под логгер
             #endregion
 
@@ -73,7 +84,8 @@ namespace SergeiLevin0.Tests.Controllers
             product_data_mock
                .Setup(p => p.GetProductById(It.IsAny<int>()))
                .Returns(default(ProductDTO));//т.е. нулл
-            var controller = new CatalogController(product_data_mock.Object);
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             var result = controller.ProductDetails(1, logger_mock.Object);
             Assert.IsType<NotFoundResult>(result);
         }
@@ -82,38 +94,43 @@ namespace SergeiLevin0.Tests.Controllers
         public void Shop_Returns_Correct_View()
         {
             var product_data_mock = new Mock<IProductData>();
-            product_data_mock
-               .Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
-               .Returns<ProductFilter>(filter => new[]//тест должен вернуть 2 дто-модели
+            var products=new[]
+            {
+                new ProductDTO
                 {
-                    new ProductDTO
+                    Id = 1,
+                    Name = "Product 1",
+                    Order = 0,
+                    Price = 10m,
+                    ImageUrl = "Product1.png",
+                    Brand = new BrandDTO
                     {
                         Id = 1,
-                        Name = "Product 1",
-                        Order = 0,
-                        Price = 10m,
-                        ImageUrl = "Product1.png",
-                        Brand = new BrandDTO
-                        {
-                            Id = 1,
-                            Name = "Brand 1"
-                        }
-                    },
-                    new ProductDTO
+                        Name = "Brand 1"
+                    }
+                },
+                new ProductDTO
+                {
+                    Id = 2,
+                    Name = "Product 2",
+                    Order = 1,
+                    Price = 20m,
+                    ImageUrl = "Product2.png",
+                    Brand = new BrandDTO
                     {
                         Id = 2,
-                        Name = "Product 2",
-                        Order = 1,
-                        Price = 20m,
-                        ImageUrl = "Product2.png",
-                        Brand = new BrandDTO
-                        {
-                            Id = 2,
-                            Name = "Brand 2"
-                        }
+                        Name = "Brand 2"
                     }
+                }
+            };
+            product_data_mock.Setup(p => p.GetProducts(It.IsAny<ProductFilter>()))
+                .Returns<ProductFilter>(filter => new PagedProductDTO
+                {
+                    Products=products,
+                    TotalCount=products.Length
                 });
-            var controller = new CatalogController(product_data_mock.Object);
+            var config_mock = new Mock<IConfiguration>();
+            var controller = new CatalogController(product_data_mock.Object, config_mock.Object);
             const int expected_category_id = 1;
             const int expected_brand_id = 5;
             var result = controller.Shop(expected_category_id, expected_brand_id);

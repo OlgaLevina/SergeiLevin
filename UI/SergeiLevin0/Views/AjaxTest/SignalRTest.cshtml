@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "SignalR - Test";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div>
+    <div id="input-form">
+        <input type="text" id="message" />
+        <input type="button" value="Отправить" id="send-button" />
+    </div>
+    <ul id="information-block"></ul><!--блок для вывода данных-->
+</div>
+
+@section Scripts
+    {
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    
+        <!--конфигурируем подключение-->
+    <script>
+        let hub_url = "/info";
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl(hub_url)//сслыка на хаб
+            .configureLogging(signalR.LogLevel.Information)//конфигурирование логирования
+            .build();//создаем соединение
+        connection.on("Send", data => $("#information-block").prepend($("<li></li>").html(data)));//подписываемся на дейстие хаба. Если срабатывает действие "Send", то включается последующие действия на стороне сервера
+        $("#send-button").click(e => connection.invoke("Send", $("#message").val()));//подписываемся на нажатие кнопки. При нажатии вызываем метод "Send" хаба и передаем данные, которые есть в блоке #message
+        connection.start();//открыть соединение - обязательно, а то не будет работать!!!
+    </script>
+}

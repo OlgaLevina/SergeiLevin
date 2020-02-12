@@ -25,10 +25,10 @@
             var sum=(decimal) sum_cart;
             <div class="total_area">
                 <ul>
-                    <li>Cart Sub Total <span>@sum.ToString("C")</span></li>
+                    <li>Cart Sub Total <span id="sub-total-order-sum">@sum.ToString("C")</span></li>
                     <li>Eco Tax <span>0</span></li>
                     <li>Shipping Cost <span>Free</span></li>
-                    <li>Total <span>@sum.ToString("C")</span></li>
+                    <li>Total <span id="total-order-sum">@sum.ToString("C")</span></li>
                 </ul>
                 @if(sum>0)
                 {

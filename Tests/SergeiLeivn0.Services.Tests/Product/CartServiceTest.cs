@@ -183,7 +183,11 @@ namespace SergeiLeivn0.Services.Tests.Product
                 var product_data_mock = new Mock<IProductData>();
                 product_data_mock
                    .Setup(c => c.GetProducts(It.IsAny<ProductFilter>()))
-                   .Returns(products);
+                   .Returns(new PagedProductDTO
+                   {
+                       Products = products,
+                       TotalCount = products.Count
+                   });
                 var cart_store_mock = new Mock<ICartStore>();
                 cart_store_mock.Setup(c => c.Cart).Returns(cart);
                 var cart_service = new CartService(product_data_mock.Object, cart_store_mock.Object);

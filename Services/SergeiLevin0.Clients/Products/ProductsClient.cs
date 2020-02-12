@@ -24,6 +24,6 @@ namespace SergeiLevin0.Clients.Products
 
         public ProductDTO GetProductById(int id) => Get<ProductDTO>($"{ServiceAddress}/{id}");
 
-        public IEnumerable<ProductDTO> GetProducts(ProductFilter filter = null) => Post(ServiceAddress, filter).Content.ReadAsAsync<List<ProductDTO>>().Result;
+        public PagedProductDTO GetProducts(ProductFilter filter = null) => Post(ServiceAddress, filter).Content.ReadAsAsync<PagedProductDTO>().Result;
     }
 }

@@ -25,7 +25,7 @@ namespace SergeiLevin0.Controllers
             nodes.AddRange(ProductData.GetCategories().Select(category => new SitemapNode(Url.Action("Shop", "Catalog", new { CategoryId = category.Id }))));
             //второй способ добавления через форыч
             foreach (var brand in ProductData.GetBrands())  nodes.Add(new SitemapNode(Url.Action("Shop", "Catalog", new { BrandId = brand.Id})));
-            foreach (var product in ProductData.GetProducts(new ProductFilter()))  nodes.Add(new SitemapNode(Url.Action("Details", "Catalog", new { product.Id })));
+            foreach (var product in ProductData.GetProducts(new ProductFilter()).Products)  nodes.Add(new SitemapNode(Url.Action("Details", "Catalog", new { product.Id })));
             return new SitemapProvider().CreateSitemap(new SitemapModel(nodes));//создаем на основе узлов провайдер карты сайта и саму карту
         }
     }
